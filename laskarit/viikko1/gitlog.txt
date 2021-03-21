@@ -1,0 +1,114 @@
+suvit@LAPTOP-HCI5LH3L:~/ot_viikko1$ git log --stat | cat
+commit 6167827c42c2df90032512516d0618399404112e
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 13:33:02 2021 +0200
+
+    poisto ja uudelleennimeys
+
+ tiedostoja/file2.txt                 | 0
+ tiedostoja/{file1.txt => file22.txt} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 70358b728036356836e4df657b49d5e6b3fce645
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 13:27:54 2021 +0200
+
+    hakemisto lisätty
+
+ tiedostoja/file1.txt | 0
+ tiedostoja/file2.txt | 0
+ tiedostoja/file3.txt | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 71287d1a1a28dc34b36274f87d93399fb0467359
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 13:17:50 2021 +0200
+
+    muutoksia
+
+ eka.txt    | 2 +-
+ kolmas.txt | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+commit 56640e591a6beed0c4bb77f7a846b4827d0f4a2f
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 13:13:02 2021 +0200
+
+    uudelleennimeäminen
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 804a97a07e7299a1a6a4dc3f373bb8b8d8ff8f81
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 13:11:20 2021 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 8c0278f98b434214dae015ed045722279dc3d192
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 13:04:29 2021 +0200
+
+    muutos
+
+ tiedosto.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit c66671ddc731804503df87ec47e4ca4a7e6fcd17
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 13:02:37 2021 +0200
+
+    lorem ipsum tidostoon
+
+ tiedosto.txt | 161 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 161 insertions(+)
+
+commit 90184005ed8a1721ba56de6c3f3d440206ffab6e
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 12:28:10 2021 +0200
+
+    hakemisto lisätty
+
+ stuff/kopio.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 7aa5b605733e4249f5931fb45da5cd9d081b16bf
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 12:25:39 2021 +0200
+
+    tokaa ja kolmatta muokattu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit da707177e718e0a915b127007762b01ba6005a12
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 12:23:50 2021 +0200
+
+    kolmas.txt lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c103962933dc6c262ac694c75d96464bd39f2923
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 12:17:54 2021 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 2d0b499b4d58749a8172e4a509a081d7055c39e8
+Author: Suvi <suvi.t.hakala@helsinki.fi>
+Date:   Sun Mar 21 12:14:25 2021 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
