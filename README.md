@@ -8,7 +8,9 @@
 
 [komentorivi.txt](https://github.com/suvithkl/ot-harjoitustyo/blob/7aabd57be7375e5c595fb813e55b020c1a5d6215/laskarit/viikko1/komentorivi.txt)
 
+.
 
+.
 
 (Pitikö tämä Markdown-harjoitteluteksti pitää tässä? En tiedä, siinä on ja pysyy siis.)
 
