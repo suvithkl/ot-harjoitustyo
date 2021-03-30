@@ -48,23 +48,13 @@ takaisin kirjautumisnäkymään.
 Perusversion toteuttamisen jälkeen järjestelmää saatetaan mahdollisesti täydentää muun muassa seuraavilla ominaisuuksilla
 
 - Väärin täytetyn sudokun tapauksessa on vaihtoehtoina joko palata aloitusnäkymään tai jatkaa peliä vaihtamalla numeroita
-
 - Pelituloksiin tallennetaan peliajan lisäksi tehtyjen virheiden määrä
-
 - Käyttäjät voivat tarkastella kaikkien pelaajien koottuja parhaita tuloksia
-
 - Pelituloksien tallentaminen verkkoon
-
 - Puhtaasti graafinen käyttöliittymä, numerot laitetaan ruutuihin ensin numeronappia ja sitten ruudukon ruutua klikkaamalla
-
 - Vaikeustason valinta, normaali ja vaikea (eli vähemmän numeroita alussa)
-
 - Pelityylin valinta, vapaa eli normaali ja aikahaaste (sudoku ratkaistava tietyssä ajassa)
-
 - Keskeytettyä sudokua voi jatkaa myöhemmin
-
 - Jos sudoku ratkaistaan väärin, tämä ilmoitus näytetään vain kerran pelin aikana
-
 - Käyttäjänimeen liittyy myös salasana, jonka kirjautuminen vaatii
-
 - Käyttäjänimen ja siihen liittyvien pelitulosten poisto
