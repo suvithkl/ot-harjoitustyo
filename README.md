@@ -18,9 +18,9 @@
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/suvithkl/ot-harjoitustyo/blob/e071859fbd9b68b588adb0bfb2dba980b1cdb60d/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmäärittely](https://github.com/suvithkl/ot-harjoitustyo/blob/01c1883ca892d0359827ed748206f3460cb27bf4/dokumentaatio/vaatimusmaarittely.md)
 
-[Työaikakirjanpito](https://github.com/suvithkl/ot-harjoitustyo/blob/eb95ee308feb216ff61c4289ee24d5d9a4e509a6/dokumentaatio/tuntikirjanpito.md)
+[Työaikakirjanpito](https://github.com/suvithkl/ot-harjoitustyo/blob/01c1883ca892d0359827ed748206f3460cb27bf4/dokumentaatio/tuntikirjanpito.md)
 
 .
 
