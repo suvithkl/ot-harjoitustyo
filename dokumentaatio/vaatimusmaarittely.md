@@ -19,10 +19,10 @@ takaisin kirjautumisnäkymään.
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi luoda käyttäjänimen järjestelmään
+- Käyttäjä voi tehdä käyttäjänimen järjestelmään
   - Käyttäjänimen on oltava vähintään 2 merkkiä pitkä ja uniikki
 
-- Käyttäjä voi kirjautua järjestelmään
+- Käyttäjä voi kirjautua sisään järjestelmään
   - Jos syötetään olemassa oleva käyttäjänimi, kirjautuminen onnistuu
   - Jos syötetään käyttäjänimi, jota ei ole olemassa, annetaan tästä ilmoitus
 
@@ -41,7 +41,7 @@ takaisin kirjautumisnäkymään.
 
 - Käyttäjä voi tarkastella pelitulostilastoja
 
-- Käyttäjä voi kirjautua ulos järjestelmästä
+- Käyttäjä voi kirjautua ulos sovelluksesta
 
 ## Jatkokehitysideoita
 
@@ -57,4 +57,4 @@ Perusversion toteuttamisen jälkeen järjestelmää saatetaan mahdollisesti täy
 - Keskeytettyä sudokua voi jatkaa myöhemmin
 - Jos sudoku ratkaistaan väärin, tämä ilmoitus näytetään vain kerran pelin aikana
 - Käyttäjänimeen liittyy myös salasana, jonka kirjautuminen vaatii
-- Käyttäjänimen ja siihen liittyvien pelitulosten poisto
+- Käyttäjänimen ja sen alla tehtyjen pelitulosten poisto
