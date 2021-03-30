@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Unicafe (1)" />
         <module name="Unicafe" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Unicafe" target="1.8" />
+      <module name="Unicafe (1)" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
