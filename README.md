@@ -16,6 +16,10 @@
 
 [Kassapäätteen testikattavuusraportti](https://github.com/suvithkl/ot-harjoitustyo/blob/a3428f3d61ee96c6549476e778fee1a46baeebbd/laskarit/viikko2/unicafe_testikattavuusraportti.png)
 
+## Dokumentaatio
+
+[Vaatimusmäärittely](https://github.com/suvithkl/ot-harjoitustyo/blob/e071859fbd9b68b588adb0bfb2dba980b1cdb60d/dokumentaatio/vaatimusmaarittely.md)
+
 .
 
 .
