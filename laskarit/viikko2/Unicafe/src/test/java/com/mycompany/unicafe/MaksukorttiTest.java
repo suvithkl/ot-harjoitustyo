@@ -26,7 +26,7 @@ public class MaksukorttiTest {
     @Test
     public void rahanLataaminenKasvattaaSaldoaOikein() {
         kortti.lataaRahaa(18);
-        assertTrue(kortti.saldo()==28);
+        assertEquals("saldo: 0.28", kortti.toString());
     }
 
     @Test
