@@ -8,6 +8,14 @@
 
 [komentorivi.txt](https://github.com/suvithkl/ot-harjoitustyo/blob/7aabd57be7375e5c595fb813e55b020c1a5d6215/laskarit/viikko1/komentorivi.txt)
 
+### Viikko 2
+
+[Maksukortin testit](https://github.com/suvithkl/ot-harjoitustyo/blob/a3428f3d61ee96c6549476e778fee1a46baeebbd/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java)
+
+[Kassapäätteen testit](https://github.com/suvithkl/ot-harjoitustyo/blob/a3428f3d61ee96c6549476e778fee1a46baeebbd/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/KassapaateTest.java)
+
+[Kassapäätteen testikattavuusraportti](https://github.com/suvithkl/ot-harjoitustyo/blob/a3428f3d61ee96c6549476e778fee1a46baeebbd/laskarit/viikko2/unicafe_testikattavuusraportti.png)
+
 .
 
 .
