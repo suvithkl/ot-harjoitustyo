@@ -17,4 +17,37 @@ public class MaksukorttiTest {
     public void luotuKorttiOlemassa() {
         assertTrue(kortti!=null);      
     }
+
+    @Test
+    public void kortinSaldoAlussaOikein() {
+        assertTrue(kortti.saldo()==10);
+    }
+
+    @Test
+    public void rahanLataaminenKasvattaaSaldoaOikein() {
+        kortti.lataaRahaa(18);
+        assertTrue(kortti.saldo()==28);
+    }
+
+    @Test
+    public void saldoVaheneeOikeinJosTarpeeksiSaldoa() {
+        kortti.otaRahaa(8);
+        assertTrue(kortti.saldo()==2);
+    }
+
+    @Test
+    public void salsoEiMuutuJosEiTarpeeksiSaldoa() {
+        kortti.otaRahaa(13);
+        assertTrue(kortti.saldo()==10);
+    }
+
+    @Test
+    public void rahaRiittaaPalautetaanTrue() {
+        assertTrue(kortti.otaRahaa(5)==true);
+    }
+
+    @Test
+    public void rahaEiRiitaPalautetaanFalse() {
+        assertTrue(kortti.otaRahaa(18)==false);
+    }
 }
