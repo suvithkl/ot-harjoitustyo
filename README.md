@@ -10,17 +10,17 @@
 
 ### Viikko 2
 
-[Maksukortin testit](https://github.com/suvithkl/ot-harjoitustyo/blob/a3428f3d61ee96c6549476e778fee1a46baeebbd/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java)
+[Maksukortin testit](https://github.com/suvithkl/ot-harjoitustyo/blob/59dc1578901624acc0534c6f729e7ece4d34fefc/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java)
 
-[Kassapäätteen testit](https://github.com/suvithkl/ot-harjoitustyo/blob/a3428f3d61ee96c6549476e778fee1a46baeebbd/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/KassapaateTest.java)
+[Kassapäätteen testit](https://github.com/suvithkl/ot-harjoitustyo/blob/59dc1578901624acc0534c6f729e7ece4d34fefc/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/KassapaateTest.java)
 
 [Kassapäätteen testikattavuusraportti](https://github.com/suvithkl/ot-harjoitustyo/blob/a3428f3d61ee96c6549476e778fee1a46baeebbd/laskarit/viikko2/unicafe_testikattavuusraportti.png)
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/suvithkl/ot-harjoitustyo/blob/01c1883ca892d0359827ed748206f3460cb27bf4/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmäärittely](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-[Työaikakirjanpito](https://github.com/suvithkl/ot-harjoitustyo/blob/01c1883ca892d0359827ed748206f3460cb27bf4/dokumentaatio/tuntikirjanpito.md)
+[Työaikakirjanpito](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
 .
 
