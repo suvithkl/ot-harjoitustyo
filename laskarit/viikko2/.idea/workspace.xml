@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54140004-3615-416e-947b-e8c76fed14e7" name="Default Changelist" comment="viikko2 javaa">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/MaksukorttiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/MaksukorttiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/MaksukorttiTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/MaksukorttiTest.class" afterDir="false" />
-    </list>
+    <list default="true" id="54140004-3615-416e-947b-e8c76fed14e7" name="Default Changelist" comment="viikko2 javaa" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +180,13 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1617075624855</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="viikko2 javaa">
+      <created>1617077184780</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1617077184780</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
