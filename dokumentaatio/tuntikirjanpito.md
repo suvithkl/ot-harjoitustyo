@@ -6,3 +6,4 @@
 | 30.3. | 2    | Windowsin kanssa tappelu ohjelmistojen toimiseksi |
 |       | 4    | harjoitustyön valmistelua, vaatimusmäärittely |
 |       | 1    | vaatimusmäärittelyn teko |
+| 31.3. | 1    | projektin luonti IntelliJ:n |
