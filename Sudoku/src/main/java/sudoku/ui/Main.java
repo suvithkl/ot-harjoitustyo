@@ -1,7 +1,8 @@
-package sudoku.sudoku;
+package sudoku.ui;
+
 
 public class Main {
     public static void main(String[] args) {
-        App.main(args);
+        SudokuUi.main(args);
     }
 }
