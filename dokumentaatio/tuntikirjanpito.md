@@ -8,4 +8,5 @@
 |       | 1    | vaatimusmäärittelyn teko |
 | 31.3. | 1    | projektin luonti IntelliJ:n |
 | 1.4.  | 7    | tappelu wsl:n kanssa, lopulta harjoitustyön teko kokonaan alusta | 
-|       | 2    | kaiken uudestaan luonti ja alustus etätyöpöydän avulla |
+|       | 2    | kaiken uudestaan luonti NetBeans:n ja alustus etätyöpöydän avulla |
+| 2.4.  | 2    | luokkarakenteen alustusta, UI:n suunnittelu |
