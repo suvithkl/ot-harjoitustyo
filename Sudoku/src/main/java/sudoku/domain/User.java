@@ -1,6 +1,5 @@
 package sudoku.domain;
 
-
 public class User {
     private String username;
 
