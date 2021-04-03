@@ -18,7 +18,6 @@ public class SudokuUi extends Application {
         // alusta riippuvuudet
     }
 
-
     @Override
     public void start(Stage stage) {
         // login scene

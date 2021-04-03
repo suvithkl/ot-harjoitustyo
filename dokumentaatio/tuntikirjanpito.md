@@ -10,3 +10,5 @@
 | 1.4.  | 7    | tappelu wsl:n kanssa, lopulta harjoitustyön teko kokonaan alusta | 
 |       | 2    | kaiken uudestaan luonti NetBeans:n ja alustus etätyöpöydän avulla |
 | 2.4.  | 2    | luokkarakenteen alustusta, UI:n suunnittelu |
+| 3.4.  | 4    | Windows-taistelua, kaiken alustus vielä kerran alusta IntelliJ:n |
+|       | 2    | sisäänkirjautumisen alustusta |
