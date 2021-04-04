@@ -1,5 +1,6 @@
 package sudoku.domain;
 
+import java.sql.*;
 import sudoku.dao.UserDao;
 
 public class SudokuService {
@@ -10,7 +11,7 @@ public class SudokuService {
     /*
      * kirjautuminen sisään
      */
-    public boolean login(String username) {
+    public boolean login(String username) throws SQLException {
         User user = userDao.findUser(username);
         if (user == null) return false;
         loggedIn = user;
@@ -31,7 +32,7 @@ public class SudokuService {
     /*
      * käyttäjän luominen
      */
-    public boolean createUser(String username) {
+    public boolean createUser(String username) throws SQLException{
         if (userDao.findUser(username) != null) return false;
         User user = new User(username);
         try {

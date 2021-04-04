@@ -1,10 +1,16 @@
 package sudoku.domain;
 
 public class User {
+    Integer id;
     private String username;
 
     public User(String username) {
+        this.id = 0; // TIETOKANNAN SEURAAVA KÄYTTÄMÄTÖN NUMERO
         this.username = username;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getUsername() {
