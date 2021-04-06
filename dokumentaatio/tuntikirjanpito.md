@@ -13,3 +13,4 @@
 | 3.4.  | 4    | Windows-taistelua, kaiken alustus vielä kerran alusta IntelliJ:n |
 |       | 2    | sisäänkirjautumisen alustusta |
 | 4.4.  | 5    | kirjautumisen toteutusta, tietokantoihin tutustumista |
+| 5.4.  | 3    | yrittämistä saada tietokanta toimimaan halutusti |
