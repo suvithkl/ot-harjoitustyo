@@ -17,6 +17,7 @@ import sudoku.domain.SudokuService;
 public class SudokuUi extends Application {
 
     private SudokuService sudokuService;
+    private Connection db;
     private Scene loginScene;
     private Scene menuScene;
     private Scene gameScene;
@@ -30,7 +31,15 @@ public class SudokuUi extends Application {
         String userTable = prop.getProperty("userTable");
         String gameTable = prop.getProperty("gameTable");
 
-        String url = "jdbc:sqlite:" + sudokuDB;
+        String userWorkingDir = System.getProperty("user.dir");
+        String fileSeparator = System.getProperty("file.separator");
+
+        String url = "jdbc:sqlite:" + userWorkingDir + fileSeparator + sudokuDB;
+        db = DriverManager.getConnection(url);
+        Statement s = db.createStatement();
+        s.execute("CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(32))");
+        s.execute("CREATE TABLE IF NOT EXISTS Game (id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, FOREIGN KEY (id) REFERENCES User(id))");
+        s.close();
     }
 
     @Override
