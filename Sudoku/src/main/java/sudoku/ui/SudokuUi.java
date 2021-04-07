@@ -90,7 +90,8 @@ public class SudokuUi extends Application {
     }
 
     @Override
-    public void stop() {
+    public void stop() throws Exception {
+        db.close();
         System.out.println("Closing Sudoku");
     }
 
