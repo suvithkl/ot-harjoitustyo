@@ -40,6 +40,7 @@ public class SudokuUi extends Application {
         s.execute("CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(32))");
         s.execute("CREATE TABLE IF NOT EXISTS Game (id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, FOREIGN KEY (id) REFERENCES User(id))");
         s.close();
+        db.close();
     }
 
     @Override
@@ -91,7 +92,7 @@ public class SudokuUi extends Application {
 
     @Override
     public void stop() throws Exception {
-        db.close();
+
         System.out.println("Closing Sudoku");
     }
 
