@@ -17,7 +17,8 @@ import sudoku.domain.SudokuService;
 public class SudokuUi extends Application {
 
     private SudokuService sudokuService;
-    private Connection db;
+    private static Connection db;
+    private static String url;
     private Scene loginScene;
     private Scene menuScene;
     private Scene gameScene;
@@ -33,15 +34,25 @@ public class SudokuUi extends Application {
 
         String userWorkingDir = System.getProperty("user.dir");
         String fileSeparator = System.getProperty("file.separator");
+        url = "jdbc:sqlite:" + userWorkingDir + fileSeparator + sudokuDB;
 
-        String url = "jdbc:sqlite:" + userWorkingDir + fileSeparator + sudokuDB;
-        db = DriverManager.getConnection(url);
+        connect();
         Statement s = db.createStatement();
         s.execute("CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(32))");
         s.execute("CREATE TABLE IF NOT EXISTS Game (id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, FOREIGN KEY (id) REFERENCES User(id))");
         s.close();
-        db.close();
+        disconnect();
     }
+
+    public static void connect() throws Exception {
+        if (db == null) db = DriverManager.getConnection(url);
+        else {
+            disconnect();
+            db = DriverManager.getConnection(url);
+        }
+    }
+
+    public static void disconnect() throws Exception { db.close(); }
 
     @Override
     public void start(Stage stage) throws SQLException {
@@ -91,10 +102,7 @@ public class SudokuUi extends Application {
     }
 
     @Override
-    public void stop() throws Exception {
-
-        System.out.println("Closing Sudoku");
-    }
+    public void stop() { System.out.println("Closing Sudoku"); }
 
     public static void main(String[] args) {
         launch();
