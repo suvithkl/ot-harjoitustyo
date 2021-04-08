@@ -49,7 +49,7 @@ public class SudokuUi extends Application {
         VBox loginPane = new VBox(10);
         loginPane.setPadding(new Insets(20));
         Label loginTitle = new Label("Sudoku");
-        loginTitle.setFont(new Font("Arial", 30));
+        loginTitle.setFont(new Font(30));
 
         VBox loginBox = new VBox(10);
         loginBox.setPadding(new Insets(10));
@@ -76,6 +76,8 @@ public class SudokuUi extends Application {
             String username = createInput.getText();
             if (username.length()<2 || username.length()>32) {
                 JOptionPane.showMessageDialog(null, "Username must be between 2 and 32 characters.");
+            } else if (username.contains("\"") || username.contains("'") || username.contains("*")) {
+                JOptionPane.showMessageDialog(null, "Username must not contain quotation marks nor asterisks.");
             } else if (sudokuService.createUser(username)) {
                 JOptionPane.showMessageDialog(null, "New user created.\nWelcome " + username + "!");
                 stage.setScene(menuScene);

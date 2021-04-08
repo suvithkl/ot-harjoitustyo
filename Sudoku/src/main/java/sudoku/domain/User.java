@@ -1,18 +1,17 @@
 package sudoku.domain;
 
 public class User {
-    Integer id;
+//    Integer id;
     private String username;
 
     public User(String username) {
         this.username = username;
     }
 
-    public void setId(Integer id) { this.id = id; }
-
-    public Integer getId() {
-        return id;
-    }
+//    LISÄÄ JOS TULEE TARVETTA
+//    --------
+//    public void setId(Integer id) { this.id = id; }
+//    public Integer getId() { return id; }
 
     public String getUsername() {
         return username;

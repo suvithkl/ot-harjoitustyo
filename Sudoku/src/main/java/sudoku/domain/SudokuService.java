@@ -1,6 +1,5 @@
 package sudoku.domain;
 
-import java.sql.*;
 import sudoku.dao.UserDao;
 
 public class SudokuService {
@@ -42,6 +41,7 @@ public class SudokuService {
         try {
             userDao.create(user);
         } catch (Exception e) {
+            System.out.println("Exception in createUser: " + e);
             return false;
         }
         return true;

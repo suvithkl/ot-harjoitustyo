@@ -13,23 +13,24 @@ public class DBUserDao implements UserDao {
     public DBUserDao(DatabaseHelper db) throws SQLException {
         users = new ArrayList<>();
         this.db = db;
+        db.connect();
         ResultSet rs = db.getResultSet("SELECT * FROM User");
         if (rs == null) return;
         while (rs.next()) {
             User u = new User(rs.getString("name"));
-            u.setId(rs.getInt("id"));
+//            u.setId(rs.getInt("id"));
             users.add(u);
         }
-    }
-
-    private void save() throws SQLException {
-
+        db.disconnect();
     }
 
     @Override
     public User create(User user) throws SQLException {
-//        user.setId();
-        save();
+        db.connect();
+        db.updateDatabase("INSERT INTO User (name) VALUES (?)", user.getUsername());
+//        ResultSet rs = db.getResultSet("SELECT id FROM User WHERE name = " + user.getUsername());
+//        user.setId(rs.getInt("id"));
+        db.disconnect();
         users.add(user);
         return user;
     }
