@@ -6,6 +6,6 @@ import sudoku.domain.User;
 
 public interface UserDao {
     User create(User user) throws SQLException;
-    User findUser(String username) throws SQLException;
-    List<User> getAll() throws SQLException;
+    List<User> getAll();
+    User findUser(String username);
 }

@@ -8,10 +8,14 @@ public class SudokuService {
     private UserDao userDao;
     private User loggedIn;
 
+    public SudokuService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     /*
      * kirjautuminen sisään
      */
-    public boolean login(String username) throws SQLException {
+    public boolean login(String username) {
         User user = userDao.findUser(username);
         if (user == null) return false;
         loggedIn = user;
@@ -32,7 +36,7 @@ public class SudokuService {
     /*
      * käyttäjän luominen
      */
-    public boolean createUser(String username) throws SQLException{
+    public boolean createUser(String username) {
         if (userDao.findUser(username) != null) return false;
         User user = new User(username);
         try {

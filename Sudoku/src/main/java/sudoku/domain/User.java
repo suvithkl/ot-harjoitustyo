@@ -5,9 +5,10 @@ public class User {
     private String username;
 
     public User(String username) {
-        this.id = 0; // TIETOKANNAN SEURAAVA KÄYTTÄMÄTÖN NUMERO
         this.username = username;
     }
+
+    public void setId(Integer id) { this.id = id; }
 
     public Integer getId() {
         return id;

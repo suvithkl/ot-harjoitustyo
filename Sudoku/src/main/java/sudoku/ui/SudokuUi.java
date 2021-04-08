@@ -12,13 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
+import sudoku.dao.DBUserDao;
+import sudoku.dao.DatabaseHelper;
 import sudoku.domain.SudokuService;
 
 public class SudokuUi extends Application {
 
     private SudokuService sudokuService;
-    private static Connection db;
-    private static String url;
     private Scene loginScene;
     private Scene menuScene;
     private Scene gameScene;
@@ -34,30 +35,16 @@ public class SudokuUi extends Application {
 
         String userWorkingDir = System.getProperty("user.dir");
         String fileSeparator = System.getProperty("file.separator");
-        url = "jdbc:sqlite:" + userWorkingDir + fileSeparator + sudokuDB;
+        String dbUrl = "jdbc:sqlite:" + userWorkingDir + fileSeparator + sudokuDB;
 
-        connect();
-        Statement s = db.createStatement();
-        s.execute("CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(32))");
-        s.execute("CREATE TABLE IF NOT EXISTS Game (id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, FOREIGN KEY (id) REFERENCES User(id))");
-        s.close();
-        disconnect();
+        DatabaseHelper dbHelper = new DatabaseHelper(dbUrl, userTable, gameTable);
+        DBUserDao userDao = new DBUserDao(dbHelper);
+
+        sudokuService = new SudokuService(userDao);
     }
-
-    public static void connect() throws Exception {
-        if (db == null) db = DriverManager.getConnection(url);
-        else {
-            disconnect();
-            db = DriverManager.getConnection(url);
-        }
-    }
-
-    public static void disconnect() throws Exception { db.close(); }
 
     @Override
     public void start(Stage stage) throws SQLException {
-
-
         // login scene
         VBox loginPane = new VBox(10);
         loginPane.setPadding(new Insets(20));
@@ -71,7 +58,12 @@ public class SudokuUi extends Application {
         Button loginButton = new Button("OK");
         loginButton.setOnAction(e->{
             String username = loginInput.getText();
-            // IF ELSE KÄYTTÄJÄNIMEN LÖYTYMISELLE
+            if (sudokuService.login(username)) {
+                JOptionPane.showMessageDialog(null, "Welcome " + username + "!");
+                stage.setScene(menuScene);
+            } else {
+                JOptionPane.showMessageDialog(null, "User does not exist.");
+            }
         });
         loginBox.getChildren().addAll(loginLabel, loginInput, loginButton);
 
@@ -82,7 +74,14 @@ public class SudokuUi extends Application {
         Button createButton = new Button("OK");
         createButton.setOnAction(e->{
             String username = createInput.getText();
-            // IF ELSE ONKO SYÖTETTY NIMI SOPIVA
+            if (username.length()<2 || username.length()>32) {
+                JOptionPane.showMessageDialog(null, "Username must be between 2 and 32 characters.");
+            } else if (sudokuService.createUser(username)) {
+                JOptionPane.showMessageDialog(null, "New user created.\nWelcome " + username + "!");
+                stage.setScene(menuScene);
+            } else {
+                JOptionPane.showMessageDialog(null, "Username must be unique.");
+            }
         });
         createBox.getChildren().addAll(createLabel, createInput, createButton);
 
