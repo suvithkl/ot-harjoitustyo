@@ -6,6 +6,8 @@ public class DatabaseHelper {
 
     private Connection db;
     private String dbUrl;
+    private PreparedStatement p;
+    private ResultSet rs;
 
     public DatabaseHelper(String dbUrl, String userTable, String gameTable) {
         this.dbUrl = dbUrl;
@@ -29,6 +31,8 @@ public class DatabaseHelper {
     public void disconnect() {
         try {
             db.close();
+            if (p != null) p.close();
+            if (rs != null) rs.close();
         } catch (SQLException e) {
             System.out.println("Exception in disconnect: " + e);;
         }
@@ -41,17 +45,17 @@ public class DatabaseHelper {
             s.execute(tableString);
             tableString = "CREATE TABLE IF NOT EXISTS " + gameTable + " (id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER," +
                     " FOREIGN KEY (id) REFERENCES User(id))";
-            s.close();
             s.execute(tableString);
+            s.close();
         } catch (SQLException e) {
             System.out.println("Exception in createTables: " + e);
         }
     }
 
     public ResultSet getResultSet(String statement) {
-        ResultSet rs = null;
+        rs = null;
         try {
-            PreparedStatement p = db.prepareStatement(statement);
+            p = db.prepareStatement(statement);
             rs = p.executeQuery();
         } catch (SQLException e) {
             System.out.println("Exception in getResultSet: " + e);
@@ -61,7 +65,7 @@ public class DatabaseHelper {
 
     public void updateDatabase(String statement, String value) {
         try {
-            PreparedStatement p = db.prepareStatement(statement);
+            p = db.prepareStatement(statement);
             p.setString(1, value);
             p.executeUpdate();
         } catch (SQLException e) {

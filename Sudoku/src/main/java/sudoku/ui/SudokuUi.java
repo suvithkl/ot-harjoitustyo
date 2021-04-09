@@ -63,6 +63,7 @@ public class SudokuUi extends Application {
                 stage.setScene(menuScene);
             } else {
                 JOptionPane.showMessageDialog(null, "User does not exist.");
+                loginInput.setText("");
             }
         });
         loginBox.getChildren().addAll(loginLabel, loginInput, loginButton);
@@ -84,6 +85,7 @@ public class SudokuUi extends Application {
             } else {
                 JOptionPane.showMessageDialog(null, "Username must be unique.");
             }
+            createInput.setText("");
         });
         createBox.getChildren().addAll(createLabel, createInput, createButton);
 
