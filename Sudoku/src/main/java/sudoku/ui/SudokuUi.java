@@ -6,13 +6,14 @@ import java.util.Properties;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
+
 import sudoku.dao.DBUserDao;
 import sudoku.dao.DatabaseHelper;
 import sudoku.domain.SudokuService;
@@ -50,6 +51,9 @@ public class SudokuUi extends Application {
         loginPane.setPadding(new Insets(20));
         Label loginTitle = new Label("Sudoku");
         loginTitle.setFont(new Font(30));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
 
         VBox loginBox = new VBox(10);
         loginBox.setPadding(new Insets(10));
@@ -59,10 +63,12 @@ public class SudokuUi extends Application {
         loginButton.setOnAction(e->{
             String username = loginInput.getText();
             if (sudokuService.login(username)) {
-                JOptionPane.showMessageDialog(null, "Welcome " + username + "!");
+                alert.setContentText("Welcome " + username + "!");
+                alert.showAndWait();
                 stage.setScene(menuScene);
             } else {
-                JOptionPane.showMessageDialog(null, "User does not exist.");
+                alert.setContentText("User does not exist.");
+                alert.showAndWait();
                 loginInput.setText("");
             }
         });
@@ -76,23 +82,51 @@ public class SudokuUi extends Application {
         createButton.setOnAction(e->{
             String username = createInput.getText();
             if (username.length()<2 || username.length()>32) {
-                JOptionPane.showMessageDialog(null, "Username must be between 2 and 32 characters.");
+                alert.setContentText("Username must be between 2 and 32 characters.");
+                alert.showAndWait();
             } else if (username.contains("\"") || username.contains("'") || username.contains("*")) {
-                JOptionPane.showMessageDialog(null, "Username must not contain quotation marks nor asterisks.");
+                alert.setContentText("Username must not contain quotation marks nor asterisks.");
+                alert.showAndWait();
             } else if (sudokuService.createUser(username)) {
-                JOptionPane.showMessageDialog(null, "New user created.\nWelcome " + username + "!");
+                alert.setContentText("New user created.\nWelcome " + username + "!");
+                alert.showAndWait();
                 stage.setScene(menuScene);
             } else {
-                JOptionPane.showMessageDialog(null, "Username must be unique.");
+                alert.setContentText("Username must be unique.");
+                alert.showAndWait();
             }
             createInput.setText("");
         });
         createBox.getChildren().addAll(createLabel, createInput, createButton);
 
         loginPane.getChildren().addAll(loginTitle, loginBox, createBox);
-        loginScene = new Scene(loginPane, 480, 640);
+        loginScene = new Scene(loginPane, 320, 480);
 
         // menu scene
+        VBox menuPane = new VBox(10);
+        menuPane.setPadding(new Insets(20));
+        Label menuTitle = new Label("Sudoku");
+        menuTitle.setFont(new Font(30));
+
+        VBox menuBox = new VBox(10);
+        menuBox.setPadding(new Insets(10));
+        Button playButton = new Button("PLAY");
+        playButton.setOnAction(e->{
+
+        });
+        Button statsButton = new Button("STATS");
+        statsButton.setOnAction(e->{
+
+        });
+        Button logoutButton = new Button("LOG OUT");
+        logoutButton.setOnAction(e->{
+            sudokuService.logout();
+            stage.setScene(loginScene);
+        });
+        menuBox.getChildren().addAll(playButton, statsButton, logoutButton);
+
+        menuPane.getChildren().addAll(menuTitle, menuBox);
+        menuScene = new Scene(menuPane, 320, 480);
 
         // game scene
 
@@ -108,6 +142,6 @@ public class SudokuUi extends Application {
     public void stop() { System.out.println("Closing Sudoku"); }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

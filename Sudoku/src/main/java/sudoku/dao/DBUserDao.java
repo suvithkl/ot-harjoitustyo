@@ -35,6 +35,7 @@ public class DBUserDao implements UserDao {
         return user;
     }
 
+//    ONKO TARPEELLINEN
     @Override
     public List<User> getAll() {
         return users;

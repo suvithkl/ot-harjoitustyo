@@ -16,3 +16,4 @@
 | 5.4.  | 3    | yrittämistä saada tietokanta toimimaan halutusti |
 | 7.4.  | 4    | tietokanta alustettu, kirjautumisen alustusta |
 | 8.4.  | 4    | kirjautuminen loppuun |
+| 9.4.  | 3    | testien kirjoittamista |
