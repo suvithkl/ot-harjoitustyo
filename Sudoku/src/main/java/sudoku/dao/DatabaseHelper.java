@@ -41,7 +41,8 @@ public class DatabaseHelper {
     private void createTables(String userTable, String gameTable) {
         try {
             Statement s = db.createStatement();
-            String tableString = "CREATE TABLE IF NOT EXISTS " + userTable + " (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(32))";
+            String tableString = "CREATE TABLE IF NOT EXISTS " + userTable + " (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(32));" +
+                    "";
             s.execute(tableString);
             tableString = "CREATE TABLE IF NOT EXISTS " + gameTable + " (id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER," +
                     " FOREIGN KEY (id) REFERENCES User(id))";
