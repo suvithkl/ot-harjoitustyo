@@ -17,3 +17,5 @@ juureen on jätetty joitakin .idea-kansion tiedostoja [suositusten](https://gith
 [Vaatimusmäärittely](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+
+[Arkkitehtuurikuvaus](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
