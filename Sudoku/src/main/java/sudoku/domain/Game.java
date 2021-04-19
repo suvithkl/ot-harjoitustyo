@@ -5,23 +5,29 @@ public class Game {
     private int id;
     private User user;
     private Grid grid;
-    private difficulty difficulty;
+    private Difficulty difficulty;
     private int lenght;
     private boolean solved;
 
-    public Game(User user, difficulty diff) {
+    public Game(User user, Difficulty diff) {
         this.user = user;
         this.grid = new Grid(diff);
         this.difficulty = diff;
     }
 
-    public enum difficulty {NORMAL}
+    public Grid getGrid() {
+        return this.grid;
+    }
 
-    public Game.difficulty getDifficulty() { return difficulty; }
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Game)) return false;
+        if (!(obj instanceof Game)) {
+            return false;
+        }
         Game o = (Game) obj;
         return this.id == o.id;
     }

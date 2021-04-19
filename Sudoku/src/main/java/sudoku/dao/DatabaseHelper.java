@@ -18,8 +18,9 @@ public class DatabaseHelper {
 
     public void connect() {
         try {
-            if (db == null) db = DriverManager.getConnection(dbUrl);
-            else {
+            if (db == null) {
+                db = DriverManager.getConnection(dbUrl);
+            } else {
                 disconnect();
                 db = DriverManager.getConnection(dbUrl);
             }
@@ -31,8 +32,12 @@ public class DatabaseHelper {
     public void disconnect() {
         try {
             db.close();
-            if (p != null) p.close();
-            if (rs != null) rs.close();
+            if (p != null) {
+                p.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
         } catch (SQLException e) {
             System.out.println("Exception in disconnect: " + e);;
         }

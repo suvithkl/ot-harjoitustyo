@@ -15,7 +15,9 @@ public class DBUserDao implements UserDao {
         this.db = db;
         db.connect();
         ResultSet rs = db.getResultSet("SELECT * FROM User");
-        if (rs == null) return;
+        if (rs == null) {
+            return;
+        }
         while (rs.next()) {
             User u = new User(rs.getString("name"));
 //            u.setId(rs.getInt("id"));
@@ -44,7 +46,9 @@ public class DBUserDao implements UserDao {
     @Override
     public User findUser(String username) {
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUsername().equals(username)) return users.get(i);
+            if (users.get(i).getUsername().equals(username)) {
+                return users.get(i);
+            }
         }
         return null;
     }

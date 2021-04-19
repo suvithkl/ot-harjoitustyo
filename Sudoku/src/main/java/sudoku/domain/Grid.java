@@ -1,32 +1,74 @@
 package sudoku.domain;
 
+import java.util.Random;
+
 public class Grid {
 
     private int[][] grid;
+    private int[][] solved;
     private Solver solver;
-    private Game.difficulty difficulty;
+    private int emptyModules;
 
-    public Grid(Game.difficulty diff) {
-        this.grid = new int[9][9];
+    public Grid(Difficulty diff) {
+        grid = new int[9][9];
         this.solver = new Solver();
-        this.difficulty = diff;
+        if (diff == Difficulty.NORMAL) {
+            emptyModules = 50;
+        }
+        generate();
     }
 
     private void generate() {
+        fill();
+        makeModulesEmpty();
+        if (!(solver.solve(grid))) {
+            generate();
+        }
+    }
+
+    private void fill() {
+        Random rnd = new Random();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                grid[i][j] = rnd.nextInt(9) + 1;
+            }
+        }
+    }
+
+    private void makeModulesEmpty() {
 
     }
 
     public boolean checkIfSolved() {
-        if (solver.solve(grid)) return true;
-        else return false;
+        if (isFull()) {
+            return true;
+        } else if (solver.solve(grid)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void printGrid() {
+    private boolean isFull() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(grid[i][j] + " ");
+                if (grid[i][j] == 0) {
+                    return false;
+                }
             }
-            System.out.println();
         }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String st = "";
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                st = st + grid[i][j] + " ";
+            }
+            st = st + "\n";
+        }
+        return st;
     }
 }

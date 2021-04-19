@@ -112,7 +112,7 @@ public class SudokuUi extends Application {
         menuBox.setPadding(new Insets(10));
         Button playButton = new Button("PLAY");
         playButton.setOnAction(e->{
-
+            stage.setScene(gameScene);
         });
         Button statsButton = new Button("STATS");
         statsButton.setOnAction(e->{
@@ -129,6 +129,17 @@ public class SudokuUi extends Application {
         menuScene = new Scene(menuPane, 320, 480);
 
         // game scene
+        VBox gamePane = new VBox(10);
+        gamePane.setPadding(new Insets(20));
+        Label gridField = new Label(sudokuService.startGame());
+        Button menuButton = new Button("MENU");
+        menuButton.setOnAction(e->{
+            stage.setScene(menuScene);
+        });
+
+        // CHECK-NAPPULA
+        gamePane.getChildren().addAll(gridField, menuButton);
+        gameScene = new Scene(gamePane, 480, 640);
 
         // statistics scene
 

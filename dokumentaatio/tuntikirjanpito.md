@@ -17,5 +17,5 @@
 | 7.4.  | 4    | tietokanta alustettu, kirjautumisen alustusta |
 | 8.4.  | 4    | kirjautuminen loppuun |
 | 9.4.  | 3    | testien kirjoittamista |
-| 11.4. | 0    | loppujen 9.4. tehtyjen muutosten (ui, login) pushaus repoon |
 | 15.4. | 2    | lisää luokkien alustusta, luokkakaavion teko |
+| 18.4. | 4    | sudokun ratkaiseminen alkuun |
