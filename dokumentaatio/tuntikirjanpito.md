@@ -19,3 +19,4 @@
 | 9.4.  | 3    | testien kirjoittamista |
 | 15.4. | 2    | lisää luokkien alustusta, luokkakaavion teko |
 | 18.4. | 4    | sudokun ratkaiseminen alkuun |
+|       | 5    | solverin luonti sudokujen generointia varten |
