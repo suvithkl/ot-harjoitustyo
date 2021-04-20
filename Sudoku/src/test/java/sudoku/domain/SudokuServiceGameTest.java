@@ -17,6 +17,7 @@ public class SudokuServiceGameTest {
 
     @Test
     public void startGameGivesGrid() {
-        assertTrue(sudokuService.startGame().length() == 171);
+        assertTrue(sudokuService.startGame() instanceof Grid);
+//        assertTrue(sudokuService.startGame().length() == 171);
     }
 }

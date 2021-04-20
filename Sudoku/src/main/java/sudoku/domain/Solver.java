@@ -10,6 +10,7 @@ public class Solver {
         this.tempGrid = new int[9][9];
     }
 
+    // hyvin spesifi käyttö pitäisikö yleistää
     public boolean solveToGenerate(int[][] grid) {
         tempGrid = grid;
         for (int i = 0; i < 9; i++) {

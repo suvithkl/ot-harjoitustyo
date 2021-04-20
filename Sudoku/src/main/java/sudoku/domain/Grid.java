@@ -60,6 +60,10 @@ public class Grid {
         return true;
     }
 
+    public int[][] getGrid() {
+        return grid;
+    }
+
     @Override
     public String toString() {
         String st = "";

@@ -1,8 +1,13 @@
 package sudoku.ui;
 
+import java.awt.*;
 import java.sql.*;
 import java.io.FileInputStream;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,7 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -21,10 +26,51 @@ import sudoku.domain.SudokuService;
 public class SudokuUi extends Application {
 
     private SudokuService sudokuService;
+    private GridPane grid = new GridPane();
+    private Button[][] gridButtons;
+    private Button[] numButtons;
+//    private Map<Integer, GridPane> grid;
+//    private Map<Integer, Button> gridButtons, numButtons;
     private Scene loginScene;
     private Scene menuScene;
     private Scene gameScene;
     private Scene statScene;
+
+//    private void generateGrid() {
+//        grid = new HashMap<>();
+//        gridButtons = new HashMap<>();
+//        for (int i = 0; i < 9; i++) {
+//            grid.put(i, new GridPane());
+//            int t = i % 3 * 3 + (i / 3) * 27;
+//            int temp = 0;
+//            for (int j = t; j < t + 20; j += 9, temp++) {
+//                for (int k = 0; k < 3; k++) {
+//                    int index = j + k;
+//                    gridButtons.put(index, new Button());
+//                    grid.get(i).add(gridButtons.get(index), k, temp);
+//                }
+//            }
+////            vai gridFieldin täyttö tähän?
+//        }
+//    }
+
+    private void generateGrid(GridPane grid, int[][] values) {
+        gridButtons = new Button[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                gridButtons[i][j] = new Button(Integer.toString(values[i][j]));
+                grid.add(gridButtons[i][j], i, j);
+            }
+        }
+    }
+
+    private void generateNumberButtons(HBox numberBox) {
+        numButtons = new Button[9];
+        for (int i = 0; i < 9; i++) {
+            numButtons[i] = new Button(Integer.toString(i+1));
+            numberBox.getChildren().add(numButtons[i]);
+        }
+    }
 
     @Override
     public void init() throws Exception {
@@ -102,6 +148,7 @@ public class SudokuUi extends Application {
         loginPane.getChildren().addAll(loginTitle, loginBox, createBox);
         loginScene = new Scene(loginPane, 320, 480);
 
+
         // menu scene
         VBox menuPane = new VBox(10);
         menuPane.setPadding(new Insets(20));
@@ -112,6 +159,7 @@ public class SudokuUi extends Application {
         menuBox.setPadding(new Insets(10));
         Button playButton = new Button("PLAY");
         playButton.setOnAction(e->{
+            generateGrid(grid, sudokuService.startGame().getGrid());
             stage.setScene(gameScene);
         });
         Button statsButton = new Button("STATS");
@@ -128,21 +176,41 @@ public class SudokuUi extends Application {
         menuPane.getChildren().addAll(menuTitle, menuBox);
         menuScene = new Scene(menuPane, 320, 480);
 
+
         // game scene
-        VBox gamePane = new VBox(10);
+        BorderPane gamePane = new BorderPane();
         gamePane.setPadding(new Insets(20));
-        Label gridField = new Label(sudokuService.startGame());
-        gridField.setFont(new Font(30));
+//        Label gridField = new Label(sudokuService.startGame());
+//        gridField.setFont(new Font(30));
+        grid.setPadding(new Insets(10));
+        grid.setVgap(10);
+        grid.setHgap(10);
+        generateGrid(grid, new int[9][9]);
+        HBox numberBox = new HBox(10);
+        generateNumberButtons(numberBox);
+        VBox toolBox = new VBox(10);
+//        for (int i = 0; i < 9; i++) {
+//            gridField.add(grid.get(i), i % 3, i / 3);
+//        }
+
+        Button checkButton = new Button("CHECK");
+        checkButton.setOnAction(e->{
+//            TODO
+        });
         Button menuButton = new Button("MENU");
         menuButton.setOnAction(e->{
             stage.setScene(menuScene);
         });
 
-        // CHECK-NAPPULA
-        gamePane.getChildren().addAll(gridField, menuButton);
+        toolBox.getChildren().addAll(checkButton, menuButton);
+        gamePane.setCenter(grid);
+        gamePane.setBottom(numberBox);
+        gamePane.setRight(toolBox);
         gameScene = new Scene(gamePane, 480, 640);
 
+
         // statistics scene
+
 
         // setup
         stage.setTitle("Sudoku");

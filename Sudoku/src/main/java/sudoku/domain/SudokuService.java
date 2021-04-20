@@ -14,9 +14,9 @@ public class SudokuService {
         this.userDao = userDao;
     }
 
-    public String startGame() {
+    public Grid startGame() {
         this.beingSolved = new Game(loggedIn, Difficulty.NORMAL);
-        return beingSolved.getGrid().toString();
+        return beingSolved.getGrid();
     }
 
     /*
