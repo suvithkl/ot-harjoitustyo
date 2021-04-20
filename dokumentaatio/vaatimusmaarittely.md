@@ -19,20 +19,21 @@ takaisin kirjautumisnäkymään.
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi tehdä käyttäjänimen järjestelmään
+- Käyttäjä voi tehdä käyttäjänimen järjestelmään _(tehty)_
   - Käyttäjänimen on oltava vähintään 2 merkkiä pitkä ja uniikki
 
-- Käyttäjä voi kirjautua sisään järjestelmään
+- Käyttäjä voi kirjautua sisään järjestelmään _(tehty)_
   - Jos syötetään olemassa oleva käyttäjänimi, kirjautuminen onnistuu
   - Jos syötetään käyttäjänimi, jota ei ole olemassa, annetaan tästä ilmoitus
 
 ### Kirjautumisen jälkeen
 
 - Käyttäjä voi pelata sudokua
-  - Käyttäjälle generoidaan näin valittaessa sudoku
-  - Tämän jälkeen sen voi ratkaista valitsemalla ruudukon ruudun kerrallaan ja kirjoittamalla numeron
+  - Käyttäjälle generoidaan näin valittaessa sudokuruudukko _(tehty)_
+  - Tämän jälkeen sudoku on ratkaistavissa
+  - Sen voi ratkaista valitsemalla ruudukon ruudun kerrallaan ja kirjoittamalla numeron _(tehty ui:n tasolla)_
 
-- Käyttäjä voi palata kesken sudokun aloitusnäkymään
+- Käyttäjä voi palata kesken sudokun aloitusnäkymään _(tehty)_
 
 - Käyttäjälle ilmoitetaan, onko kokonaan täytetty sudoku on oikein vai väärin
   - Väärän ratkaisun tapauksessa palataan aloitusnäkymään
@@ -41,7 +42,7 @@ takaisin kirjautumisnäkymään.
 
 - Käyttäjä voi tarkastella pelitulostilastoja
 
-- Käyttäjä voi kirjautua ulos sovelluksesta
+- Käyttäjä voi kirjautua ulos sovelluksesta _(tehty)_
 
 ## Jatkokehitysideoita
 
@@ -51,7 +52,7 @@ Perusversion toteuttamisen jälkeen järjestelmää saatetaan mahdollisesti täy
 - Pelituloksiin tallennetaan peliajan lisäksi tehtyjen virheiden määrä
 - Käyttäjät voivat tarkastella kaikkien pelaajien koottuja parhaita tuloksia
 - Pelituloksien tallentaminen verkkoon
-- Puhtaasti graafinen käyttöliittymä, numerot laitetaan ruutuihin ensin numeronappia ja sitten ruudukon ruutua klikkaamalla
+- Puhtaasti graafinen käyttöliittymä, numerot laitetaan ruutuihin ensin numeronappia ja sitten ruudukon ruutua klikkaamalla _(tehty)_
 - Vaikeustason valinta, normaali ja vaikea (eli vähemmän numeroita alussa)
 - Pelityylin valinta, vapaa eli normaali ja aikahaaste (sudoku ratkaistava tietyssä ajassa)
 - Keskeytettyä sudokua voi jatkaa myöhemmin
