@@ -23,4 +23,4 @@
 |       | 2    | luokkakaavion korjaus, testausta |
 | 19.4. | 1    | lisää testejä |
 |       | 2    | testejä, käyttöliittymää eteenpäin |
-| yht.  | 61   |  |
+| yht.  | 63   |  |
