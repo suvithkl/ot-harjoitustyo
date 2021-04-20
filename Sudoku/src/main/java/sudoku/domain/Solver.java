@@ -10,7 +10,7 @@ public class Solver {
         this.tempGrid = new int[9][9];
     }
 
-    public boolean solve(int[][] grid) {
+    public boolean solveToGenerate(int[][] grid) {
         tempGrid = grid;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -19,7 +19,7 @@ public class Solver {
                     currentColumn = j;
                     for (int k = 1; k < 10; k++) {
                         tempGrid[i][j] = k;
-                        if (isValidForRow(k) && isValidForColumn(k) && isValidForSubgrid(k) && solve(tempGrid)) {
+                        if (isValidForRow(k) && isValidForColumn(k) && isValidForSubgrid(k) && solveToGenerate(tempGrid)) {
                             return true;
                         }
                         tempGrid[i][j] = 0;
@@ -31,7 +31,7 @@ public class Solver {
         return true;
     }
 
-    // Näistä vähän fiksummat kun ehtii
+    // Näistä vähän fiksummat jos aikaa
 
     private boolean isValidForRow(int number) {
         for (int i = 0; i < 9; i++) {

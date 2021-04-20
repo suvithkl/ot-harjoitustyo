@@ -21,7 +21,7 @@ public class Grid {
     private void generate() {
         fill();
         makeModulesEmpty();
-        if (!(solver.solve(grid))) {
+        if (!(solver.solveToGenerate(grid))) {
             generate();
         }
     }
@@ -42,7 +42,7 @@ public class Grid {
     public boolean checkIfSolved() {
         if (isFull()) {
             return true;
-        } else if (solver.solve(grid)) {
+        } else if (solver.solveToGenerate(grid)) {
             return true;
         } else {
             return false;

@@ -132,6 +132,7 @@ public class SudokuUi extends Application {
         VBox gamePane = new VBox(10);
         gamePane.setPadding(new Insets(20));
         Label gridField = new Label(sudokuService.startGame());
+        gridField.setFont(new Font(30));
         Button menuButton = new Button("MENU");
         menuButton.setOnAction(e->{
             stage.setScene(menuScene);
