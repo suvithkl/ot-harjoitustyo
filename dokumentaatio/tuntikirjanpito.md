@@ -21,6 +21,7 @@
 | 18.4. | 4    | sudokun ratkaiseminen alkuun |
 |       | 5    | solverin luonti sudokujen generointia varten |
 |       | 2    | luokkakaavion korjaus, testausta |
-| 19.4. | 1    | lisää testejä |
+| 20.4. | 1    | lisää testejä |
 |       | 2    | testejä, käyttöliittymää eteenpäin |
+| 21.4. | 1    | luokka-/pakkauskaavion teko |
 | yht.  | 63   |  |
