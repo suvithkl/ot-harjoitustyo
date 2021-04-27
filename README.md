@@ -26,7 +26,7 @@ Projekti voidaan suorittaa kansiosta Sudoku komennolla
 ```
 mvn compile exec:java -Dexec.mainClass=sudoku.ui.Main
 ```
-Jos ohjelmaa yritetään suorittaa virtuaalityöpöydän avulla ja yllä oleva komento aiheuttaa SQL-virheen, on repositorio kloonattava hakemistoon _/tmp_ (virtuaalityöpöydän verkkolevy ei ole osoittautunut tarpeeksi nopeaksi tietokannalle).
+Jos ohjelmaa yritetään suorittaa virtuaalityöpöydän avulla ja yllä oleva komento aiheuttaa SQL-virheen, on repositorio kloonattava hakemistoon _~/tmp_ (virtuaalityöpöydän verkkolevy ei ole osoittautunut tarpeeksi nopeaksi tietokannalle).
 
 ### Testaus
 
