@@ -39,6 +39,10 @@ Testikattavuusraportti voidaan luoda komennolla
 ```
 mvn jacoco:report
 ```
+sekä komennolla
+```
+mvn test jacoco:report
+```
 ja avaamalla selaimella tiedosto _target/site/jacoco/index.html_ sitä voidaan lukea.
 
 ### Suoritettavan jarin generointi
