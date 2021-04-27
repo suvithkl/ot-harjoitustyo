@@ -17,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import sudoku.dao.DBUserDao;
@@ -29,37 +31,27 @@ public class SudokuUi extends Application {
     private GridPane grid = new GridPane();
     private Button[][] gridButtons;
     private Button[] numButtons;
-//    private Map<Integer, GridPane> grid;
-//    private Map<Integer, Button> gridButtons, numButtons;
+    private int[] chosenModule = new int[2];
     private Scene loginScene;
     private Scene menuScene;
     private Scene gameScene;
     private Scene statScene;
 
-//    private void generateGrid() {
-//        grid = new HashMap<>();
-//        gridButtons = new HashMap<>();
-//        for (int i = 0; i < 9; i++) {
-//            grid.put(i, new GridPane());
-//            int t = i % 3 * 3 + (i / 3) * 27;
-//            int temp = 0;
-//            for (int j = t; j < t + 20; j += 9, temp++) {
-//                for (int k = 0; k < 3; k++) {
-//                    int index = j + k;
-//                    gridButtons.put(index, new Button());
-//                    grid.get(i).add(gridButtons.get(index), k, temp);
-//                }
-//            }
-////            vai gridFieldin täyttö tähän?
-//        }
-//    }
-
     private void generateGrid(GridPane grid, int[][] values) {
         gridButtons = new Button[9][9];
+        Text t = new Text("");
+        t.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (values[i][j] == 0) gridButtons[i][j] = new Button("  ");
-                else gridButtons[i][j] = new Button(Integer.toString(values[i][j]));
+                if (values[i][j] == 0) t.setText("  ");
+                else t.setText(Integer.toString(values[i][j]));
+                gridButtons[i][j] = new Button(t.getText());
+                int a = i;
+                int b = j;
+                gridButtons[i][j].setOnAction(e->{
+                    chosenModule[0] = a;
+                    chosenModule[1] = b;
+                });
                 grid.add(gridButtons[i][j], i, j);
             }
         }
@@ -68,7 +60,12 @@ public class SudokuUi extends Application {
     private void generateNumberButtons(HBox numberBox) {
         numButtons = new Button[9];
         for (int i = 0; i < 9; i++) {
-            numButtons[i] = new Button(Integer.toString(i+1));
+            int number = i + 1;
+            numButtons[i] = new Button(Integer.toString(number));
+            numButtons[i].setOnAction(e->{
+                sudokuService.setModule(chosenModule[0], chosenModule[1], number);
+                gridButtons[chosenModule[0]][chosenModule[1]].setText(Integer.toString(number));
+            });
             numberBox.getChildren().add(numButtons[i]);
         }
     }
@@ -190,13 +187,16 @@ public class SudokuUi extends Application {
         HBox numberBox = new HBox(10);
         generateNumberButtons(numberBox);
         VBox toolBox = new VBox(10);
-//        for (int i = 0; i < 9; i++) {
-//            gridField.add(grid.get(i), i % 3, i / 3);
-//        }
 
         Button checkButton = new Button("CHECK");
         checkButton.setOnAction(e->{
-//            TODO
+            if (sudokuService.checkGame()) {
+                alert.setContentText("Sudoku solved successfully.\nCongratulations " + sudokuService.getLoggedIn() + "!");
+            } else {
+                alert.setContentText("Sudoku solved incorrectly.\nPlease start a new game.");
+            }
+            alert.showAndWait();
+            stage.setScene(menuScene);
         });
         Button menuButton = new Button("MENU");
         menuButton.setOnAction(e->{

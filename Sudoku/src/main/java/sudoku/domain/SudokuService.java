@@ -19,6 +19,15 @@ public class SudokuService {
         return beingSolved.getGrid();
     }
 
+    public boolean checkGame() {
+        return beingSolved.checkIfSolved();
+    }
+
+    public boolean setModule(int a, int b, int number) {
+        beingSolved.setModule(a, b, number);
+        return beingSolved.getGrid().getGrid()[a][b] == number;
+    }
+
     /*
      * kirjautuminen sisään
      */

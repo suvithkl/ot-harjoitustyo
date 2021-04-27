@@ -15,12 +15,20 @@ public class Game {
         this.difficulty = diff;
     }
 
+    public boolean checkIfSolved() {
+        return this.grid.checkIfSolved();
+    }
+
     public Grid getGrid() {
         return this.grid;
     }
 
     public Difficulty getDifficulty() {
         return this.difficulty;
+    }
+
+    public void setModule(int a, int b, int number) {
+        grid.setModule(a, b, number);
     }
 
     @Override

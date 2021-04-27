@@ -12,6 +12,7 @@ public class Grid {
 
     public Grid(Difficulty diff) {
         grid = new int[9][9];
+        solved = new int[9][9];
         this.solver = new Solver();
         if (diff == Difficulty.NORMAL) {
             emptyModules = 50;
@@ -26,7 +27,7 @@ public class Grid {
         randomize("row");
         randomize("column");
         if (solver.solved(grid)) {
-            solved = grid;
+            setSolved();
         } else {
             generate();
         }
@@ -144,6 +145,19 @@ public class Grid {
 
     public int[][] getGrid() {
         return grid;
+    }
+
+    // valmiina olleet numerot niin että ei voi muokata jos ehtii
+    public void setModule(int a, int b, int number) {
+        grid[a][b] = number;
+    }
+
+    private void setSolved() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                solved[i][j] = grid[i][j];
+            }
+        }
     }
 
     @Override

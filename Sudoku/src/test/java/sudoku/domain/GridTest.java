@@ -20,6 +20,8 @@ public class GridTest {
     public void printsCorrectly() { assertTrue(g1.toString().length() == 171); }
 
     @Test
-    public void test() {
+    public void setsModuleCorrectly() {
+        g1.setModule(0, 0, 88);
+        assertTrue(g1.getGrid()[0][0] == 88);
     }
 }
