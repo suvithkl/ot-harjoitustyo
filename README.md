@@ -53,6 +53,11 @@ mvn package
 ```
 ja se löytyy hakemistosta _target_ nimellä _Sudoku-1.0-SNAPSHOT.jar_ ja vaihtoehtoisesti nimellä _Sudoku-1.0-SNAPSHOT-shaded.jar_.
 
+Se voidaan myös suorittaa komennolla
+```
+java -jar Sudoku-1.0-SNAPSHOT.jar
+```
+
 ### Checkstyle
 
 Tiedostossa [checkstyle.xml](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/checkstyle.xml) määrittellyt tarkastukset voidaan suorittaa komennolla
