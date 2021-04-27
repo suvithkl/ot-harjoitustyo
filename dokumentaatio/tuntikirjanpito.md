@@ -24,4 +24,5 @@
 | 20.4. | 1    | lisää testejä |
 |       | 2    | testejä, käyttöliittymää eteenpäin |
 | 21.4. | 1    | luokka-/pakkauskaavion teko |
-| yht.  | 63   |  |
+| 26.4. | 7    | sudokun generointi ja ratkaisu alusta valmiiksi uudella tavalla |
+| yht.  | 70   |  |
