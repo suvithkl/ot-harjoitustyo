@@ -58,7 +58,8 @@ public class SudokuUi extends Application {
         gridButtons = new Button[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                gridButtons[i][j] = new Button(Integer.toString(values[i][j]));
+                if (values[i][j] == 0) gridButtons[i][j] = new Button("  ");
+                else gridButtons[i][j] = new Button(Integer.toString(values[i][j]));
                 grid.add(gridButtons[i][j], i, j);
             }
         }

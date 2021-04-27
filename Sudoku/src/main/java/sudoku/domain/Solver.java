@@ -11,20 +11,18 @@ public class Solver {
     }
 
     // hyvin spesifi käyttö pitäisikö yleistää
-    public boolean solveToGenerate(int[][] grid) {
+    public boolean solved(int[][] grid) {
         tempGrid = grid;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (tempGrid[i][j] == 0) {
+                if (tempGrid[i][j] != 0) {
                     currentRow = i;
                     currentColumn = j;
-                    for (int k = 1; k < 10; k++) {
-                        tempGrid[i][j] = k;
-                        if (isValidForRow(k) && isValidForColumn(k) && isValidForSubgrid(k) && solveToGenerate(tempGrid)) {
-                            return true;
-                        }
-                        tempGrid[i][j] = 0;
+                    int number = tempGrid[i][j];
+                    if (!(isValidForRow(number) && isValidForColumn(number) && isValidForSubgrid(number))) {
+                        return false;
                     }
+                } else {
                     return false;
                 }
             }
@@ -36,8 +34,10 @@ public class Solver {
 
     private boolean isValidForRow(int number) {
         for (int i = 0; i < 9; i++) {
-            if (tempGrid[currentRow][i] == number) {
-                return false;
+            if (i != currentColumn) {
+                if (tempGrid[currentRow][i] == number) {
+                    return false;
+                }
             }
         }
         return true;
@@ -45,8 +45,10 @@ public class Solver {
 
     private boolean isValidForColumn(int number) {
         for (int i = 0; i < 9; i++) {
-            if (tempGrid[i][currentColumn] == number) {
-                return false;
+            if (i != currentRow) {
+                if (tempGrid[i][currentColumn] == number) {
+                    return false;
+                }
             }
         }
         return true;
@@ -59,20 +61,11 @@ public class Solver {
         int lastColumn = firstColumn + 3;
         for (int i = firstRow; i < lastRow; i++) {
             for (int j = firstColumn; j < lastColumn; j++) {
-                if (tempGrid[i][j] == number) {
-                    return false;
+                if (i != currentRow && j != currentColumn) {
+                    if (tempGrid[i][j] == number) {
+                        return false;
+                    }
                 }
-            }
-        }
-        return true;
-    }
-
-    private boolean checkArrayIsValid(boolean[] array) {
-        if (tempGrid[currentRow][currentColumn] != 0) {
-            if (!(array[tempGrid[currentRow][currentColumn] - 1])) {
-                array[tempGrid[currentRow][currentColumn] - 1] = true;
-            } else {
-                return false;
             }
         }
         return true;
