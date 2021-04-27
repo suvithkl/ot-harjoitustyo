@@ -28,14 +28,14 @@ takaisin kirjautumisnäkymään.
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä voi pelata sudokua
-  - Käyttäjälle generoidaan näin valittaessa sudokuruudukko _(tehty)_
+- Käyttäjä voi pelata sudokua _(tehty)_
+  - Käyttäjälle generoidaan näin valittaessa sudokuruudukko
   - Tämän jälkeen sudoku on ratkaistavissa
-  - Sen voi ratkaista valitsemalla ruudukon ruudun kerrallaan ja kirjoittamalla numeron _(tehty ui:n tasolla)_
+  - Sen voi ratkaista valitsemalla ruudukon ruudun kerrallaan ja kirjoittamalla numeron _(huom. jatkokehitysidean tavalla)_
 
 - Käyttäjä voi palata kesken sudokun aloitusnäkymään _(tehty)_
 
-- Käyttäjälle ilmoitetaan, onko kokonaan täytetty sudoku on oikein vai väärin
+- Käyttäjälle ilmoitetaan, onko täytetty sudoku on oikein vai väärin _(tehty)_
   - Väärän ratkaisun tapauksessa palataan aloitusnäkymään
 
 - Kun sudoku on ratkaistu oikein, paikalliselle levylle tallentuu tieto pelanneesta käyttäjästä ja käytetystä ajasta
@@ -56,6 +56,5 @@ Perusversion toteuttamisen jälkeen järjestelmää saatetaan mahdollisesti täy
 - Vaikeustason valinta, normaali ja vaikea (eli vähemmän numeroita alussa)
 - Pelityylin valinta, vapaa eli normaali ja aikahaaste (sudoku ratkaistava tietyssä ajassa)
 - Keskeytettyä sudokua voi jatkaa myöhemmin
-- Jos sudoku ratkaistaan väärin, tämä ilmoitus näytetään vain kerran pelin aikana
 - Käyttäjänimeen liittyy myös salasana, jonka kirjautuminen vaatii
 - Käyttäjänimen ja sen alla tehtyjen pelitulosten poisto
