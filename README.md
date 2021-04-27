@@ -18,11 +18,15 @@ juureen on jätetty joitakin .idea-kansion tiedostoja [suositusten](https://gith
 
 ## Releaset
 
+[Viikko 5](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Komentorivikomennot
+
+Komennot on kirjoitettu muodossa, jossa ne voidaan suorittaa hakemistossa _Sudoku_.
 
 ### Suorittaminen
 
-Projekti voidaan suorittaa kansiosta Sudoku komennolla
+Projekti voidaan suorittaa komennolla
 ```
 mvn compile exec:java -Dexec.mainClass=sudoku.ui.Main
 ```
@@ -53,7 +57,7 @@ mvn package
 ```
 ja se löytyy hakemistosta _target_ nimellä _Sudoku-1.0-SNAPSHOT.jar_ ja mahdollisesti nimellä _Sudoku-1.0-SNAPSHOT-shaded.jar_.
 
-Se voidaan myös suorittaa komennolla
+Se voidaan suorittaa komennolla
 ```
 java -jar target/Sudoku-1.0-SNAPSHOT.jar
 ```
