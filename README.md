@@ -55,7 +55,7 @@ ja se löytyy hakemistosta _target_ nimellä _Sudoku-1.0-SNAPSHOT.jar_ ja mahdol
 
 Se voidaan myös suorittaa komennolla
 ```
-java -jar /target/Sudoku-1.0-SNAPSHOT.jar
+java -jar target/Sudoku-1.0-SNAPSHOT.jar
 ```
 
 ### Checkstyle
