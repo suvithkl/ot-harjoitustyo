@@ -51,11 +51,11 @@ Suoritettava jar-tiedosto voidaan luoda komennolla
 ```
 mvn package
 ```
-ja se löytyy hakemistosta _target_ nimellä _Sudoku-1.0-SNAPSHOT.jar_ ja vaihtoehtoisesti nimellä _Sudoku-1.0-SNAPSHOT-shaded.jar_.
+ja se löytyy hakemistosta _target_ nimellä _Sudoku-1.0-SNAPSHOT.jar_ ja mahdollisesti nimellä _Sudoku-1.0-SNAPSHOT-shaded.jar_.
 
 Se voidaan myös suorittaa komennolla
 ```
-java -jar Sudoku-1.0-SNAPSHOT.jar
+java -jar /target/Sudoku-1.0-SNAPSHOT.jar
 ```
 
 ### Checkstyle
