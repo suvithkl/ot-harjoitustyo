@@ -1,33 +1,70 @@
 package sudoku.dao;
 
-import java.io.File;
-import java.sql.DatabaseMetaData;
-import java.util.List;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.*;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 import static org.junit.Assert.*;
 import sudoku.domain.User;
 
 public class DBUserDaoTest {
 
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
-
-    File testDB;
-    UserDao userDao;
+    DBUserDao userDao;
+    DatabaseHelper db;
 
     @Before
-    public void setUp() throws Exception {
-        testDB = testFolder.newFile("testData.db");
+    public void setUp() {
+        String dbUrl = "jdbc:sqlite:" + System.getProperty("user.dir") + System.getProperty("file.separator") + "testingData.db";
+        db = new DatabaseHelper(dbUrl, "User", "Game");
+        try {
+            userDao = new DBUserDao(db);
+        } catch (SQLException e) {
+            assert false;
+        }
+    }
 
+    @Test
+    public void createAddsToDb() {
+        try {
+            userDao.create(new User("tester"));
+        } catch (SQLException e) {
+            assert false;
+        }
+        db.connect();
+        ResultSet rs = db.getResultSet("SELECT * FROM User");
+        if (rs == null) assert false;
+        try {
+            assertTrue(rs.getString("name").equals("tester"));
+        } catch (SQLException e) {
+            assert false;
+        }
+    }
+
+    @Test
+    public void createAddsToList() {
+        try {
+            userDao.create(new User("tester"));
+        } catch (SQLException e) {
+            assert false;
+        }
+        assertTrue(userDao.getAll().get(0).getUsername().equals("tester"));
+    }
+
+    @Test
+    public void findsCorrectUser() {
+        try {
+            userDao.create(new User("tester"));
+        } catch (SQLException e) {
+            assert false;
+        }
+        assertTrue(userDao.findUser("tester").getUsername().equals("tester"));
     }
 
     @After
-    public void tearDown() {
-        testDB.delete();
+    public void tearDown() throws Exception {
+        db.disconnect();
+        Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + System.getProperty("file.separator") + "testingData.db"));
     }
 }

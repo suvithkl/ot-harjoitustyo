@@ -1,5 +1,8 @@
 package sudoku.domain;
 
+/**
+ * Pelin vaikeustasoa edustava enum
+ */
 public enum Difficulty {
-    NORMAL
+    EASY, NORMAL, HARD
 }

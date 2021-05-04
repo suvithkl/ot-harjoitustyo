@@ -1,8 +1,10 @@
 package sudoku.domain;
 
 import java.util.Random;
-//import org.apache.flink.annotation.VisibleForTesting;
 
+/**
+ * Sudokun peliruudukkoa edustava luokka
+ */
 public class Grid {
 
     private int[][] grid;
@@ -14,14 +16,11 @@ public class Grid {
         grid = new int[9][9];
         solved = new int[9][9];
         this.solver = new Solver();
-        if (diff == Difficulty.NORMAL) {
-            emptyModules = 50;
-        }
+        setEmptyModules(diff);
         generate();
     }
 
     // tähän lisäksi joku transpoosijuttu randomin lisäämiseksi?
-//    @VisibleForTesting
     private void generate() {
         fill();
         randomize("row");
@@ -34,6 +33,10 @@ public class Grid {
         makeModulesEmpty();
     }
 
+    /**
+     * Tarkistaminen, onko kyseinen sudokuruudukko ratkaistu oikein
+     * @return true jos ratkaisu on oikea, muuten false
+     */
     public boolean checkIfSolved() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -143,11 +146,21 @@ public class Grid {
         return rowNotEmpty && columnNotEmpty;
     }
 
+    /**
+     * Sudokuruudukko
+     * @return sudokuruudukko matriisina
+     */
     public int[][] getGrid() {
         return grid;
     }
 
     // valmiina olleet numerot niin että ei voi muokata jos ehtii
+    /**
+     * Numeron asettaminen sudokuruudukon ruutuun
+     * @param a ruudun rivinumero
+     * @param b ruudun sarakenumero
+     * @param number asetettava numero
+     */
     public void setModule(int a, int b, int number) {
         grid[a][b] = number;
     }
@@ -160,6 +173,20 @@ public class Grid {
         }
     }
 
+    private void setEmptyModules(Difficulty diff) {
+        if (diff == Difficulty.EASY) {
+            emptyModules = 40;
+        } else if (diff == Difficulty.NORMAL) {
+            emptyModules = 50;
+        } else if (diff == Difficulty.HARD) {
+            emptyModules = 60;
+        }
+    }
+
+    /**
+     * Sudokuruudukko ja sen sisältämät numerot merkkijonona
+     * @return sudokuruudukko ja sen sisältämät numerot merkkijonona
+     */
     @Override
     public String toString() {
         String st = "";

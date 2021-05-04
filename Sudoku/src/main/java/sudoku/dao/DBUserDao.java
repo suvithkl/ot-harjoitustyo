@@ -10,6 +10,7 @@ public class DBUserDao implements UserDao {
     private List<User> users;
     private DatabaseHelper db;
 
+    // TAULUN NIMI KONFIGUROITAVAKSI!!
     public DBUserDao(DatabaseHelper db) throws SQLException {
         users = new ArrayList<>();
         this.db = db;
@@ -37,7 +38,6 @@ public class DBUserDao implements UserDao {
         return user;
     }
 
-//    ONKO TARPEELLINEN
     @Override
     public List<User> getAll() {
         return users;

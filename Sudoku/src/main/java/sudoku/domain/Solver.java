@@ -1,5 +1,8 @@
 package sudoku.domain;
 
+/**
+ * Sudokujen ratkaistavissa olemisen tarkistamisesta vastaava luokka
+ */
 public class Solver {
 
     private int tempGrid[][];
@@ -11,6 +14,12 @@ public class Solver {
     }
 
     // hyvin spesifi käyttö pitäisikö yleistää
+
+    /**
+     * Tarkistaminen, vastaako töysi generoitu sudokuruudukko oikein ratkaistua sudokuruudukkoa
+     * @param grid täysi sudokuruudukko matriisina
+     * @return true jos ruudukko vastaa oiken ratkaistua sudokuruudukkoa, muuten false
+     */
     public boolean solved(int[][] grid) {
         tempGrid = grid;
         for (int i = 0; i < 9; i++) {

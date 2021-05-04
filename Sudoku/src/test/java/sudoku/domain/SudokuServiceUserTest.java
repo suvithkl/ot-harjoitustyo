@@ -7,12 +7,14 @@ import static org.junit.Assert.*;
 public class SudokuServiceUserTest {
 
     FakeUserDao userDao;
+    FakeGameDao gameDao;
     SudokuService sudokuService;
 
     @Before
     public void setUp() {
         userDao = new FakeUserDao();
-        sudokuService = new SudokuService(userDao);
+        gameDao = new FakeGameDao(userDao);
+        sudokuService = new SudokuService(userDao, gameDao);
     }
 
     @Test

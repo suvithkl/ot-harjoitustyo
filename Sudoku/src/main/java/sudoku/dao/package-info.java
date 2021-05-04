@@ -1,4 +1,4 @@
-/*
+/**
  * Tietojen pysyväistallennus
  */
 

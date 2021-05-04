@@ -1,22 +1,26 @@
 package sudoku.domain;
 
+/**
+ * Sovelluksen käyttäjää edustava luokka
+ */
 public class User {
-//    Integer id;
+
     private String username;
 
     public User(String username) {
         this.username = username;
     }
 
-//    LISÄÄ JOS TULEE TARVETTA
-//    --------
-//    public void setId(Integer id) { this.id = id; }
-//    public Integer getId() { return id; }
-
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Vertaileminen, ovatko kaksi käyttäjää samat
+     * @param obj toinen käyttäjä johon kyseistä käyttäjää verrataan
+     * @return true jos käyttäjänimet ovat samat, muuten false
+     * @see Object#equals(Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof User)) {

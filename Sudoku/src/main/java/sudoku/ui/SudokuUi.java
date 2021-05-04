@@ -3,15 +3,20 @@ package sudoku.ui;
 import java.awt.*;
 import java.sql.*;
 import java.io.FileInputStream;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,8 +26,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javafx.util.Duration;
+import sudoku.dao.DBGameDao;
 import sudoku.dao.DBUserDao;
 import sudoku.dao.DatabaseHelper;
+import sudoku.domain.Difficulty;
 import sudoku.domain.SudokuService;
 
 public class SudokuUi extends Application {
@@ -32,6 +40,10 @@ public class SudokuUi extends Application {
     private Button[][] gridButtons;
     private Button[] numButtons;
     private int[] chosenModule = new int[2];
+    private Label clock;
+    private Date timeStart;
+    private long timeCount;
+    private Timeline timeline;
     private Scene loginScene;
     private Scene menuScene;
     private Scene gameScene;
@@ -70,6 +82,30 @@ public class SudokuUi extends Application {
         }
     }
 
+    private void startGame(Stage stage, Difficulty diff) {
+        generateGrid(grid, sudokuService.startGame(diff).getGrid());
+        startClock();
+        stage.setScene(gameScene);
+    }
+
+    private void startClock() {
+        timeStart = Calendar.getInstance().getTime();
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e->{
+            timeCount = Calendar.getInstance().getTime().getTime() - timeStart.getTime();
+            clock.setText(String.valueOf(TimeUnit.SECONDS.convert(timeCount, TimeUnit.MILLISECONDS)));
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    private ObservableList fillStatList() {
+        ObservableList list = FXCollections.observableArrayList();
+        for (String s : sudokuService.getSolved()) {
+            list.add(s);
+        }
+        return list;
+    }
+
     @Override
     public void init() throws Exception {
         Properties prop = new Properties();
@@ -84,8 +120,9 @@ public class SudokuUi extends Application {
 
         DatabaseHelper dbHelper = new DatabaseHelper(dbUrl, userTable, gameTable);
         DBUserDao userDao = new DBUserDao(dbHelper);
+        DBGameDao gameDao = new DBGameDao(dbHelper, userDao);
 
-        sudokuService = new SudokuService(userDao);
+        sudokuService = new SudokuService(userDao, gameDao);
     }
 
     @Override
@@ -143,7 +180,12 @@ public class SudokuUi extends Application {
         });
         createBox.getChildren().addAll(createLabel, createInput, createButton);
 
-        loginPane.getChildren().addAll(loginTitle, loginBox, createBox);
+        Button exitButton = new Button("EXIT");
+        exitButton.setOnAction(e->{
+
+        });
+
+        loginPane.getChildren().addAll(loginTitle, loginBox, createBox, exitButton);
         loginScene = new Scene(loginPane, 320, 480);
 
 
@@ -153,25 +195,38 @@ public class SudokuUi extends Application {
         Label menuTitle = new Label("Sudoku");
         menuTitle.setFont(new Font(30));
 
-        VBox menuBox = new VBox(10);
-        menuBox.setPadding(new Insets(10));
-        Button playButton = new Button("PLAY");
-        playButton.setOnAction(e->{
-            generateGrid(grid, sudokuService.startGame().getGrid());
-            stage.setScene(gameScene);
+        VBox playBox = new VBox(10);
+        playBox.setPadding(new Insets(10));
+        Label playTitle = new Label("New game");
+        Button easyButton = new Button("EASY");
+        easyButton.setOnAction(e->{
+            startGame(stage, Difficulty.EASY);
         });
+        Button normalButton = new Button("NORMAL");
+        normalButton.setOnAction(e->{
+            startGame(stage, Difficulty.NORMAL);
+        });
+        Button hardButton = new Button("HARD");
+        hardButton.setOnAction(e->{
+            startGame(stage, Difficulty.HARD);
+        });
+        playBox.getChildren().addAll(playTitle, easyButton, normalButton, hardButton);
+
+        VBox oSceneBox = new VBox(10);
+        oSceneBox.setPadding(new Insets(10));
         Button statsButton = new Button("STATS");
         statsButton.setOnAction(e->{
 
+            stage.setScene(statScene);
         });
         Button logoutButton = new Button("LOG OUT");
         logoutButton.setOnAction(e->{
             sudokuService.logout();
             stage.setScene(loginScene);
         });
-        menuBox.getChildren().addAll(playButton, statsButton, logoutButton);
+        oSceneBox.getChildren().addAll(statsButton, logoutButton);
 
-        menuPane.getChildren().addAll(menuTitle, menuBox);
+        menuPane.getChildren().addAll(menuTitle, playBox, oSceneBox);
         menuScene = new Scene(menuPane, 320, 480);
 
 
@@ -187,11 +242,16 @@ public class SudokuUi extends Application {
         HBox numberBox = new HBox(10);
         generateNumberButtons(numberBox);
         VBox toolBox = new VBox(10);
+        toolBox.setPadding(new Insets(10));
 
+        clock = new Label("");
         Button checkButton = new Button("CHECK");
         checkButton.setOnAction(e->{
             if (sudokuService.checkGame()) {
-                alert.setContentText("Sudoku solved successfully.\nCongratulations " + sudokuService.getLoggedIn() + "!");
+                timeline.stop();
+                sudokuService.saveGame(timeCount/1000);
+                alert.setContentText("Sudoku solved successfully in " + timeCount/1000 + " seconds.\nCongratulations "
+                        + sudokuService.getLoggedIn() + "!");
             } else {
                 alert.setContentText("Sudoku solved incorrectly.\nPlease start a new game.");
             }
@@ -202,8 +262,8 @@ public class SudokuUi extends Application {
         menuButton.setOnAction(e->{
             stage.setScene(menuScene);
         });
+        toolBox.getChildren().addAll(clock, checkButton, menuButton);
 
-        toolBox.getChildren().addAll(checkButton, menuButton);
         gamePane.setCenter(grid);
         gamePane.setBottom(numberBox);
         gamePane.setRight(toolBox);
@@ -211,6 +271,20 @@ public class SudokuUi extends Application {
 
 
         // statistics scene
+        VBox statPane = new VBox(10);
+        statPane.setPadding(new Insets(10));
+
+        ListView statList = new ListView();
+        statList.setPadding(new Insets(10));
+        statList.setItems(fillStatList());
+
+        Button backButton = new Button("MENU");
+        backButton.setOnAction(e->{
+            stage.setScene(menuScene);
+        });
+
+        statPane.getChildren().addAll(statList, backButton);
+        statScene = new Scene(statPane, 480, 640);
 
 
         // setup

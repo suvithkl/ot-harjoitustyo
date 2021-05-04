@@ -7,19 +7,21 @@ import static org.junit.Assert.*;
 public class SudokuServiceGameTest {
 
     FakeUserDao userDao;
+    FakeGameDao gameDao;
     SudokuService sudokuService;
     SudokuService startedService;
 
     @Before
     public void setUp() {
         userDao = new FakeUserDao();
-        sudokuService = new SudokuService(userDao);
-        startedService = new SudokuService(userDao);
-        startedService.startGame();
+        gameDao = new FakeGameDao(userDao);
+        sudokuService = new SudokuService(userDao, gameDao);
+        startedService = new SudokuService(userDao, gameDao);
+        startedService.startGame(Difficulty.NORMAL);
     }
 
     @Test
-    public void startGameGivesGrid() { assertTrue(sudokuService.startGame() instanceof Grid); }
+    public void startGameGivesGrid() { assertTrue(sudokuService.startGame(Difficulty.NORMAL) instanceof Grid); }
 
     @Test
     public void unsolvedCheckedAsUnsolved() { assertFalse(startedService.checkGame()); }
