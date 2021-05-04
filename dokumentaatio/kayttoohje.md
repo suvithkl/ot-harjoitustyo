@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [sudoku.jar]().
+Lataa tiedosto [sudoku.jar](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6).
 
 ## Konfigurointi
 
