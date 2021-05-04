@@ -41,6 +41,8 @@ Vaikeustason valinnan jälkeen siirrytään pelinäkymään.
 
 Täytä sudokuruudukkoa painamalla ensin haluamaasi ruutua ja sen jälkeen alareunan numeronapeista haluamaasi numeroa.
 
+Näet sudokun ratkaisemiseen käyttäneesi sekunnit pelinäkymän oikeasta yläkulmasta.
+
 Tarkista onko täyttämäsi sudoku ratkaistu oikein painamalla nappia _CHECK_.
 
 Jos sudoku on ratkaistu oikein, pelin tiedot tallennetaan pelitilastoihin ja siirrytään takaisin valikkonäkymään.
