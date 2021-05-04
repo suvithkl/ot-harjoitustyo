@@ -26,6 +26,10 @@ Alla oleva luokka-/pakkauskaavio kuvaa eri pakkausten luokkien välisiä suhteit
 
 ![Luokka-/pakkauskaavio](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/luokka-pakkauskaavio.svg)
 
+Ohjelman datamalli koostuu luokista _User_ ja _Game_, jotka ilmentävät käyttäjiä ja heidän ratkaisemiaan sudokupelejä (ks. luokkakaavio yllä).
+
+Varsinaisesta sovelluslogiikan toiminnallisuudesta huolehtii luokka _SudokuService_, josta tehdään vain yksi ilmentymä yhdellä ohjelman käynnistyskerralla.
+
 ### Päätoiminnallisuudet
 
 #### Pelin aloittaminen
