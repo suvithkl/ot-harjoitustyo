@@ -22,6 +22,8 @@ juureen on jätetty joitakin .idea-kansion tiedostoja [suositusten](https://gith
 
 [Viikko 5](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko5)
 
+[Viikko 6](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6)
+
 ## Komentorivikomennot
 
 Komennot on kirjoitettu muodossa, jossa ne voidaan suorittaa hakemistossa _Sudoku_ (eli esim. Viikon 5 releasen polussa _/ot-harjoitustyo-viikko5/Sudoku_).
