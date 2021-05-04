@@ -28,4 +28,5 @@
 | 27.4. | 3    | käyttöliittymän päivitys, testausta |
 | 3.5   | 4    | lisää vaikeustasoja, pelitietojen tallentaminen |
 | 4.5.  | 3    | testausta, käyttöliittymän edistystä |
-| yht.  | 80   |  |
+|       | 4    | JavaDocin aloitus, dokumentaatiota, testejä |
+| yht.  | 84   |  |
