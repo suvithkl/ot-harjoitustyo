@@ -6,6 +6,16 @@ Ohjelman rakenteen muodostaa kolmen kerroksen kerrosarkkitehtuuri. Pakkausrakenn
 
 ![Pakkauskaavio](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/pakkauskaavio.svg)
 
+## Käyttöliittymä
+
+Ohjelman käyttöliittymä on toteutettu luokassa _sudoku.ui.SudokuUi_. Se sisältää neljä eri näkymää, jotka ovat kirjautumisnäkymä, valikkonäkymä, pelinäkymä ja tilastonäkymä, ja jotka jokainen ovat oma _Scene_-olionsa. Näistä näytetään aina vain yhtä ohjelman _stagen_ avulla.
+
+Käyttöliittymällä olio sudokuService (luokan _sudoku.domain.SudokuService_ ilmentymä), joka huolehtii sovelluslogiikasta. Kyseisen olion metodien kutsumisen avulla sovelluslogiikka on eriytetty käyttöliittymästä.
+
+Kun aloitetaan uusi peli, käyttöliittymä kutsuu metodiaan _startGame_, joka saa parametrinaan valitun vaikeustason. Tämä renderöi sovelluslogiikan genoroiman ja sitten palauttaman halutunlaisen sudokuruudukon näkyviin pelinäkymään.
+
+Kun käyttäjä päättää tarkastella pelitilastoja, käyttöliittymä kutsuu metodiaan _fillStatList_, jolle sovelluslogiikka antaa listan ratkaistuihin sudokuihin liittyvistä tiedoista. Se renderöi tiedot käyttäjän nähtäville tilastonäkymään. 
+
 ## Sovelluslogiikka
 
 Alla olevasta luokkakaaviosta ilmenee ohjelman luokkarakenne.
