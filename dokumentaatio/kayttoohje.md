@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [sudoku.jar](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6).
+Lataa tiedosto [Sudoku.jar](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6).
 
 ## Konfigurointi
 
@@ -8,7 +8,7 @@ Lataa tiedosto [sudoku.jar](https://github.com/suvithkl/ot-harjoitustyo/releases
 
 Käynnistä sovellus komennolla
 ```
-java -jar sudoku.jar
+java -jar Sudoku.jar
 ```
 
 ## Sisäänkirjautuminen
