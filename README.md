@@ -62,6 +62,14 @@ Se voidaan suorittaa komennolla
 java -jar target/Sudoku-1.0-SNAPSHOT.jar
 ```
 
+### JavaDoc
+
+JavaDoc voidaan luoda komennolla
+```
+mvn javadoc:javadoc
+```
+ja avaamalla selaimella tiedosto _target/site/apidocs/index.thml_ sitä voidaan lukea.
+
 ### Checkstyle
 
 Tiedostossa [checkstyle.xml](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/checkstyle.xml) määrittellyt tarkastukset voidaan suorittaa komennolla
