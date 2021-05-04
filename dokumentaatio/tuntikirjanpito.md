@@ -26,4 +26,6 @@
 | 21.4. | 1    | luokka-/pakkauskaavion teko |
 | 26.4. | 7    | sudokun generointi ja ratkaisu alusta valmiiksi uudella tavalla |
 | 27.4. | 3    | käyttöliittymän päivitys, testausta |
-| yht.  | 73   |  |
+| 3.5   | 4    | lisää vaikeustasoja, pelitietojen tallentaminen |
+| 4.5.  | 3    | testausta, käyttöliittymän edistystä |
+| yht.  | 80   |  |
