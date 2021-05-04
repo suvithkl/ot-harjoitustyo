@@ -26,7 +26,7 @@ juureen on jätetty joitakin .idea-kansion tiedostoja [suositusten](https://gith
 
 ## Komentorivikomennot
 
-Komennot on kirjoitettu muodossa, jossa ne voidaan suorittaa hakemistossa _Sudoku_ (eli esim. Viikon 5 releasen polussa _/ot-harjoitustyo-viikko5/Sudoku_).
+Komennot on kirjoitettu muodossa, jossa ne voidaan suorittaa hakemistossa _Sudoku_ (eli esim. Viikon 6 releasen polussa _/ot-harjoitustyo-viikko6/Sudoku_).
 
 ### Suorittaminen
 
