@@ -28,7 +28,9 @@ Alla oleva luokka-/pakkauskaavio kuvaa eri pakkausten luokkien välisiä suhteit
 
 Ohjelman datamalli koostuu luokista _User_ ja _Game_, jotka ilmentävät käyttäjiä ja heidän ratkaisemiaan sudokupelejä (ks. luokkakaavio yllä).
 
-Varsinaisesta sovelluslogiikan toiminnallisuudesta huolehtii luokka _SudokuService_, josta tehdään vain yksi ilmentymä yhdellä ohjelman käynnistyskerralla.
+Varsinaisesta sovelluslogiikan toiminnallisuudesta huolehtii luokka _SudokuService_, josta tehdään vain yksi ilmentymä yhdellä ohjelman käynnistyskerralla. Sen metodien avulla käytetään käyttöliittymän toimintoja. Mahdollista on kirjautua sisään (_boolean login(String username)_), luoda uusi käyttäjä (_boolean createUser(String username)_), kirjautua ulos (_void logout()_), aloittaa uusi peli (_Grid startGame(Difficulty diff)_), asettaa numeroita sudokuruudukkoon (_boolean setModule(int a, int b, int number)_), tarkistaa onko ratkaistu sudoku oikein (_boolean checkGame()_) ja tarkastella pelitilastoja (_boolean saveGame(long time)_, _User getLoggedIn(), _List<String> getSolved()_).
+  
+Pakkauksen _sudoku.dao_ rajapintojen toteuttavat luokat huolehtivat tietojen tallentamisesta. _SudokuService_ pääsee siis käyttäjiin ja peleihin kiinni niiden kautta, kun ne injektoidaan konstruktoitaessa _SudokuService_:lle (ks. luokka-/pakkauskaavio yllä).
 
 ### Päätoiminnallisuudet
 
@@ -38,7 +40,7 @@ Painettaessa valikkonäkymän _PLAY_-nappia ohjelman kontrolli kulkeen alla olev
 
 ![startGame-sekvenssikaavio](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/startGame-sekvenssi.png)
 
-Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan luokan _sudokuService_ metodia _startGame_, joka aluksi luo uuden _Game_-olion, tälle annetaan parametriksi _User_-olio ja enum-tyyppinä vaikeustaso. Luodessa uusi _Game_-olio luodaan myös uusi _Grid_-olio, joka saa myös vaikeustason enum-tyyppisenä parametrikseen. _Grid_-olion luonti generoi uuden sudokuruudukon matriisin muotoon yksityisten metodien avulla. Sitten sovelluslogiikka kutsuu juuri luodun uuden pelin metodia _getGrid_, joka palauttaa juuri luodun _Grid_-olion _sudokuService_:lle, joka palauttaa sen käyttöliitymälle. Käyttöliittymä kutsuu palautetun sudokuruudukon metodia _getGrid_, joka palauttaa luodun ruudukon matriisina. Sitten käyttöliittymä generoi käyttäjälle näytettävän peliruudukon metodillaan _generateGrid_, jolle annetaan parametriksi _GridPane_-elementti ja palautettu matrsiisi. Lopuksi näkymä vaihdetaan pelinäkymään.
+Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan luokan _SudokuService_ metodia _startGame_, joka aluksi luo uuden _Game_-olion, tälle annetaan parametriksi _User_-olio ja enum-tyyppinä vaikeustaso. Luodessa uusi _Game_-olio luodaan myös uusi _Grid_-olio, joka saa myös vaikeustason enum-tyyppisenä parametrikseen. _Grid_-olion luonti generoi uuden sudokuruudukon matriisin muotoon yksityisten metodien avulla. Sitten sovelluslogiikka kutsuu juuri luodun uuden pelin metodia _getGrid_, joka palauttaa juuri luodun _Grid_-olion _sudokuService_:lle, joka palauttaa sen käyttöliitymälle. Käyttöliittymä kutsuu palautetun sudokuruudukon metodia _getGrid_, joka palauttaa luodun ruudukon matriisina. Sitten käyttöliittymä generoi käyttäjälle näytettävän peliruudukon metodillaan _generateGrid_, jolle annetaan parametriksi _GridPane_-elementti ja palautettu matrsiisi. Lopuksi näkymä vaihdetaan pelinäkymään.
 
 ## Tietojen pysyväistallennus
 
@@ -52,4 +54,4 @@ Syötettäessä uusi uniikki käyttäjätunnus kirjautumisnäkymän uuden käytt
 
 ![createUser-sekvenssikaavio](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/createUser-sekvenssi.png)
 
-Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan _sudokuService_-luokasta löytyvää metodia _createUser_, jolle annetaan parametriksi käyttäjänimi. _userDao_ tarkistaa onko käyttäjänimeä jo olemassa, ja palauttaa tuloksen sovelluslogiikalle. Jos annettu käyttäjänimi on uniikki eli uusi käyttäjä voidaan luoda, _sudokuService_ luo uuden _User_-olion, jolle annetaan parametrina käyttäjänimi. Sovelluslogiikka tallentaa uuden käyttäjän _UserDao_:n metodilla _create_, joka saa parametrina juuri luodun _User_-olion. Jos talletus onnistuu, palautetaan totuusarvo käyttöliittymälle. Lopuksi käyttöliittymä näytettää käyttäjälle ilmoituksen uuden käyttäjän onnistuneesta luonnista ja vaihtaa näkymäksi valikkonäkymän.
+Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan _SudokuService_-luokasta löytyvää metodia _createUser_, jolle annetaan parametriksi käyttäjänimi. _userDao_ tarkistaa onko käyttäjänimeä jo olemassa, ja palauttaa tuloksen sovelluslogiikalle. Jos annettu käyttäjänimi on uniikki eli uusi käyttäjä voidaan luoda, _sudokuService_ luo uuden _User_-olion, jolle annetaan parametrina käyttäjänimi. Sovelluslogiikka tallentaa uuden käyttäjän _UserDao_:n metodilla _create_, joka saa parametrina juuri luodun _User_-olion. Jos talletus onnistuu, palautetaan totuusarvo käyttöliittymälle. Lopuksi käyttöliittymä näytettää käyttäjälle ilmoituksen uuden käyttäjän onnistuneesta luonnista ja vaihtaa näkymäksi valikkonäkymän.
