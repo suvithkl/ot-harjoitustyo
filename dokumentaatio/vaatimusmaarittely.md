@@ -38,9 +38,9 @@ takaisin kirjautumisnäkymään.
 - Käyttäjälle ilmoitetaan, onko täytetty sudoku on oikein vai väärin _(tehty)_
   - Väärän ratkaisun tapauksessa palataan aloitusnäkymään
 
-- Kun sudoku on ratkaistu oikein, paikalliselle levylle tallentuu tieto pelanneesta käyttäjästä ja käytetystä ajasta
+- Kun sudoku on ratkaistu oikein, paikalliselle levylle tallentuu tieto pelanneesta käyttäjästä ja käytetystä ajasta _(tehty)_
 
-- Käyttäjä voi tarkastella pelitulostilastoja
+- Käyttäjä voi tarkastella pelitulostilastoja _(tehty)_
 
 - Käyttäjä voi kirjautua ulos sovelluksesta _(tehty)_
 
@@ -53,7 +53,7 @@ Perusversion toteuttamisen jälkeen järjestelmää saatetaan mahdollisesti täy
 - Käyttäjät voivat tarkastella kaikkien pelaajien koottuja parhaita tuloksia
 - Pelituloksien tallentaminen verkkoon
 - Puhtaasti graafinen käyttöliittymä, numerot laitetaan ruutuihin ensin numeronappia ja sitten ruudukon ruutua klikkaamalla _(tehty)_
-- Vaikeustason valinta, normaali ja vaikea (eli vähemmän numeroita alussa)
+- Vaikeustason valinta, normaali ja vaikea (eli vähemmän numeroita alussa) _(tehty)_
 - Pelityylin valinta, vapaa eli normaali ja aikahaaste (sudoku ratkaistava tietyssä ajassa)
 - Keskeytettyä sudokua voi jatkaa myöhemmin
 - Käyttäjänimeen liittyy myös salasana, jonka kirjautuminen vaatii
