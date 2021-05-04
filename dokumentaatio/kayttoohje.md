@@ -1,14 +1,14 @@
 # Käyttöohje
 
-Lataa tiedosto [Sudoku.jar](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6).
+Lataa ja pura [palautusrepositorion lähdekoodi](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6).
 
 ## Konfigurointi
 
 ## Sovelluksen käynnistäminen
 
-Käynnistä sovellus komennolla
+Käynnistä sovellus kansiosta _Sudoku_ komennolla
 ```
-java -jar Sudoku.jar
+mvn compile exec:java -Dexec.mainClass=sudoku.ui.Main
 ```
 
 ## Sisäänkirjautuminen
