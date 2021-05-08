@@ -58,9 +58,9 @@ public class DBGameDaoTest {
 
     @Test
     public void returnsCorrectDifficultyEnum() {
-        assertTrue(gameDao.setDifficulty("EASY").equals(Difficulty.EASY));
-        assertTrue(gameDao.setDifficulty("NORMAL").equals(Difficulty.NORMAL));
-        assertTrue(gameDao.setDifficulty("HARD").equals(Difficulty.HARD));
+        assertTrue(gameDao.convertToDifficulty("EASY").equals(Difficulty.EASY));
+        assertTrue(gameDao.convertToDifficulty("NORMAL").equals(Difficulty.NORMAL));
+        assertTrue(gameDao.convertToDifficulty("HARD").equals(Difficulty.HARD));
     }
 
     @After

@@ -25,6 +25,12 @@ public class FakeUserDao implements UserDao {
     }
 
     @Override
+    public User getByUsername(String username) {
+        if (username.equals("tester")) return users.get(0);
+        else return null;
+    }
+
+    @Override
     public User findUser(String username) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equals(username)) return users.get(i);

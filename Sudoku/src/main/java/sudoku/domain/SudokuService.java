@@ -1,7 +1,10 @@
 package sudoku.domain;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import sudoku.dao.GameDao;
 import sudoku.dao.UserDao;
 
@@ -41,11 +44,11 @@ public class SudokuService {
 
     /**
      * Pelituloksen tallentaminen
-     * @param time pelatun pelin kesto sekunteina
+     * @param time pelatun pelin kesto muodossa 00:00
      * @return true jos pelituloksen tallentaminen onnistui, muuten false
      */
-    public boolean saveGame(long time) {
-        beingSolved.setTime(Long.toString(time));
+    public boolean saveGame(String time) {
+        beingSolved.setTime(time);
         try {
             gameDao.save(beingSolved);
         } catch (Exception e) {
@@ -73,8 +76,9 @@ public class SudokuService {
      */
     public List<String> getSolved() {
         List<String> list = new ArrayList<>();
-        for (Game g : gameDao.getAll()) {
-            String s = g.getUser().getUsername() + ": " + g.getTime() + " seconds with difficulty " + g.getDifficulty().name();
+        List<Game> temp = gameDao.getAll().stream().sorted(Comparator.comparing(Game::getTime)).collect(Collectors.toList());
+        for (Game g : temp) {
+            String s = g.getUser().getUsername() + ";" + g.getTime() + ";" + g.getDifficulty().name();
             list.add(s);
         }
         return list;

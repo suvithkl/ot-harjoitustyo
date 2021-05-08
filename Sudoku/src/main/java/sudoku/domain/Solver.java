@@ -13,8 +13,6 @@ public class Solver {
         this.tempGrid = new int[9][9];
     }
 
-    // hyvin spesifi käyttö pitäisikö yleistää
-
     /**
      * Tarkistaminen, vastaako töysi generoitu sudokuruudukko oikein ratkaistua sudokuruudukkoa
      * @param grid täysi sudokuruudukko matriisina
@@ -38,8 +36,6 @@ public class Solver {
         }
         return true;
     }
-
-    // Näistä vähän fiksummat jos aikaa
 
     private boolean isValidForRow(int number) {
         for (int i = 0; i < 9; i++) {

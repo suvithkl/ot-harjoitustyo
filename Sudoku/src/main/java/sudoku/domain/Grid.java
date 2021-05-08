@@ -8,26 +8,22 @@ import java.util.Random;
 public class Grid {
 
     private int[][] grid;
-    private int[][] solved;
     private Solver solver;
     private int emptyModules;
 
     public Grid(Difficulty diff) {
         grid = new int[9][9];
-        solved = new int[9][9];
         this.solver = new Solver();
         setEmptyModules(diff);
         generate();
     }
 
-    // tähän lisäksi joku transpoosijuttu randomin lisäämiseksi?
     private void generate() {
         fill();
         randomize("row");
         randomize("column");
-        if (solver.solved(grid)) {
-            setSolved();
-        } else {
+        transpose();
+        if (!(solver.solved(grid))) {
             generate();
         }
         makeModulesEmpty();
@@ -38,14 +34,11 @@ public class Grid {
      * @return true jos ratkaisu on oikea, muuten false
      */
     public boolean checkIfSolved() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (grid[i][j] != solved[i][j]) {
-                    return false;
-                }
-            }
+        if (solver.solved(grid)) {
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 
     private void fill() {
@@ -54,12 +47,10 @@ public class Grid {
         for (int i = 0; i < 9; i++) {
             a = b;
             for (int j = 0; j < 9; j++) {
-                if (a <= 9) {
-                    grid[i][j] = a;
-                } else {
+                if (a > 9) {
                     a = 1;
-                    grid[i][j] = a;
                 }
+                grid[i][j] = a;
                 a++;
             }
             b = a + 3;
@@ -111,6 +102,16 @@ public class Grid {
         }
     }
 
+    private void transpose() {
+        int[][] tempGrid = new int[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                tempGrid[i][j] = grid[j][i];
+            }
+        }
+        grid = tempGrid;
+    }
+
     private void makeModulesEmpty() {
         Random rnd = new Random();
         for (int i = 0; i < emptyModules; i++) {
@@ -127,7 +128,6 @@ public class Grid {
         }
     }
 
-    // tässä voitaisiin hyväksyä yksi tyhjä rivi/sarake?
     private boolean canErase(int a, int b) {
         boolean rowNotEmpty = false;
         boolean columnNotEmpty = false;
@@ -154,7 +154,6 @@ public class Grid {
         return grid;
     }
 
-    // valmiina olleet numerot niin että ei voi muokata jos ehtii
     /**
      * Numeron asettaminen sudokuruudukon ruutuun
      * @param a ruudun rivinumero
@@ -163,14 +162,6 @@ public class Grid {
      */
     public void setModule(int a, int b, int number) {
         grid[a][b] = number;
-    }
-
-    private void setSolved() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                solved[i][j] = grid[i][j];
-            }
-        }
     }
 
     private void setEmptyModules(Difficulty diff) {

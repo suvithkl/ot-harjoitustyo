@@ -1,12 +1,12 @@
 package sudoku.dao;
 
-import sudoku.domain.Difficulty;
-import sudoku.domain.Game;
-import sudoku.domain.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import sudoku.domain.Difficulty;
+import sudoku.domain.Game;
+import sudoku.domain.User;
 
 public class DBGameDao implements GameDao {
 
@@ -16,23 +16,30 @@ public class DBGameDao implements GameDao {
     public DBGameDao(DatabaseHelper db, UserDao users) throws SQLException {
         games = new ArrayList<>();
         this.db = db;
+        fillGamesList(users);
+    }
+
+    private void fillGamesList(UserDao users) throws SQLException {
         db.connect();
         ResultSet rs = db.getResultSet("SELECT * FROM Game");
         if (rs == null) {
+            db.disconnect();
             return;
         }
         while (rs.next()) {
-            String name = rs.getString("name");
-            User user = users.getAll().stream().filter(u->u.getUsername().equals(name)).findFirst().orElse(null);
+            String username = rs.getString("name");
+            User user = users.getByUsername(username);
             String diff = rs.getString("difficulty");
-            Difficulty difficulty = setDifficulty(diff);
+            Difficulty difficulty = convertToDifficulty(diff);
             Game g = new Game(user, difficulty);
+            String time = rs.getString("time");
+            g.setTime(time);
             games.add(g);
         }
         db.disconnect();
     }
 
-    protected Difficulty setDifficulty(String diff) {
+    protected Difficulty convertToDifficulty(String diff) {
         if (diff.equals(Difficulty.EASY.name())) {
             return Difficulty.EASY;
         } else if (diff.equals(Difficulty.NORMAL.name())) {

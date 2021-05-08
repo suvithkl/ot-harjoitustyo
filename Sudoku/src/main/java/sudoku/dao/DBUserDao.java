@@ -3,6 +3,7 @@ package sudoku.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import sudoku.domain.User;
 
 public class DBUserDao implements UserDao {
@@ -10,7 +11,6 @@ public class DBUserDao implements UserDao {
     private List<User> users;
     private DatabaseHelper db;
 
-    // TAULUN NIMI KONFIGUROITAVAKSI!!
     public DBUserDao(DatabaseHelper db) throws SQLException {
         users = new ArrayList<>();
         this.db = db;
@@ -21,7 +21,6 @@ public class DBUserDao implements UserDao {
         }
         while (rs.next()) {
             User u = new User(rs.getString("name"));
-//            u.setId(rs.getInt("id"));
             users.add(u);
         }
         db.disconnect();
@@ -31,8 +30,6 @@ public class DBUserDao implements UserDao {
     public User create(User user) throws SQLException {
         db.connect();
         db.updateDatabase("INSERT INTO User (name) VALUES (?)", user.getUsername());
-//        ResultSet rs = db.getResultSet("SELECT id FROM User WHERE name = " + user.getUsername());
-//        user.setId(rs.getInt("id"));
         db.disconnect();
         users.add(user);
         return user;
@@ -41,6 +38,11 @@ public class DBUserDao implements UserDao {
     @Override
     public List<User> getAll() {
         return users;
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        return users.stream().filter(u->u.getUsername().equals(username)).findFirst().orElse(null);
     }
 
     @Override
