@@ -29,4 +29,5 @@
 | 3.5   | 4    | lisää vaikeustasoja, pelitietojen tallentaminen |
 | 4.5.  | 3    | testausta, käyttöliittymän edistystä |
 |       | 4    | JavaDocin aloitus, dokumentaatiota, testejä |
-| yht.  | 84   |  |
+| 7.5.  | 5    | käyttöliittymää, pelitilastojen tallennusta, solverin yleistys |
+| yht.  | 89   |  |
