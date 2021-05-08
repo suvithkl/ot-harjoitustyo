@@ -30,4 +30,5 @@
 | 4.5.  | 3    | testausta, käyttöliittymän edistystä |
 |       | 4    | JavaDocin aloitus, dokumentaatiota, testejä |
 | 7.5.  | 5    | käyttöliittymää, pelitilastojen tallennusta, solverin yleistys |
-| yht.  | 89   |  |
+| 8.5.  | 3    | yleisiä korjauksia, käyttöliittymä |
+| yht.  | 92   |  |
