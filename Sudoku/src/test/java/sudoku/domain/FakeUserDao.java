@@ -14,10 +14,7 @@ public class FakeUserDao implements UserDao {
     }
 
     @Override
-    public User create(User user) throws SQLException {
-        users.add(user);
-        return user;
-    }
+    public void create(User user) throws SQLException { users.add(user); }
 
     @Override
     public List<User> getAll() {

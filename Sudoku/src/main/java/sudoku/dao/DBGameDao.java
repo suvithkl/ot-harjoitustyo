@@ -8,11 +8,17 @@ import sudoku.domain.Difficulty;
 import sudoku.domain.Game;
 import sudoku.domain.User;
 
+/**
+ * Tietokantaan tallentava versio GameDao-rajapinnan toteuttavasta luokasta
+ */
 public class DBGameDao implements GameDao {
 
     private List<Game> games;
     private DatabaseHelper db;
 
+    /**
+     * Alustaa oliomuuttujat ja hakee jo tallennetut pelit tietokannasta games-listaan
+     */
     public DBGameDao(DatabaseHelper db, UserDao users) throws SQLException {
         games = new ArrayList<>();
         this.db = db;
@@ -21,7 +27,7 @@ public class DBGameDao implements GameDao {
 
     private void fillGamesList(UserDao users) throws SQLException {
         db.connect();
-        ResultSet rs = db.getResultSet("SELECT * FROM Game");
+        ResultSet rs = db.getResultSet("SELECT * FROM " + db.getGameTable());
         if (rs == null) {
             db.disconnect();
             return;
@@ -39,6 +45,12 @@ public class DBGameDao implements GameDao {
         db.disconnect();
     }
 
+    /**
+     * Muuntaa vaikeustason merkkijonosta Difficulty-enumiksi
+     * @param diff vaikeustaso merkkijonona
+     * @return vaikeustaso enumina
+     * @see Difficulty
+     */
     protected Difficulty convertToDifficulty(String diff) {
         if (diff.equals(Difficulty.EASY.name())) {
             return Difficulty.EASY;
@@ -51,16 +63,24 @@ public class DBGameDao implements GameDao {
         }
     }
 
+    /**
+     * Tallentaa pelituloksen (aika, vaikeustaso, käyttäjänimi) tietokantaan
+     * @param game tallennettava peli
+     * @throws SQLException jos tallentaminen ei onnistu
+     */
     @Override
-    public Game save(Game game) throws SQLException {
+    public void save(Game game) throws SQLException {
         db.connect();
-        db.updateDatabase("INSERT INTO Game (time,difficulty,name) VALUES (?,?,?)", game.getTime(),
-                game.getDifficulty().name(), game.getUser().getUsername());
+        db.addToDatabase("INSERT INTO " + db.getGameTable() + " (time,difficulty,name) VALUES (?,?,?)",
+                game.getTime(), game.getDifficulty().name(), game.getUser().getUsername());
         db.disconnect();
         games.add(game);
-        return game;
     }
 
+    /**
+     * Kaikki tietokantaan tallennetut pelit
+     * @return kaikki tietokantaan tallennetut pelit
+     */
     @Override
     public List<Game> getAll() {
         return games;

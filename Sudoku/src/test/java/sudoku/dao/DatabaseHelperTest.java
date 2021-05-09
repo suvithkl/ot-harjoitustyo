@@ -27,7 +27,7 @@ public class DatabaseHelperTest {
 
     @Test
     public void canUpdateDatabase() throws SQLException {
-        db.updateDatabase("INSERT INTO Test1 (name) VALUES (?)", "tester");
+        db.addToDatabase("INSERT INTO Test1 (name) VALUES (?)", "tester");
         assertEquals("tester", db.getResultSet("SELECT * FROM Test1").getString(2).toString());
     }
 

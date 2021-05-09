@@ -16,7 +16,7 @@ public class User {
     }
 
     /**
-     * Vertaileminen, ovatko kaksi käyttäjää samat
+     * Vertailee ovatko kaksi käyttäjää samat
      * @param obj toinen käyttäjä johon kyseistä käyttäjää verrataan
      * @return true jos käyttäjänimet ovat samat, muuten false
      * @see Object#equals(Object)

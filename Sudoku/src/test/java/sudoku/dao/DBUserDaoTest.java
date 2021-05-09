@@ -59,7 +59,7 @@ public class DBUserDaoTest {
         } catch (SQLException e) {
             assert false;
         }
-        assertTrue(userDao.findUser("tester").getUsername().equals("tester"));
+        assertTrue(userDao.getByUsername("tester").getUsername().equals("tester"));
     }
 
     @After

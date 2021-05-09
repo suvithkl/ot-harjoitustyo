@@ -1,7 +1,7 @@
 package sudoku.domain;
 
 /**
- * Sudokujen ratkaistavissa olemisen tarkistamisesta vastaava luokka
+ * Sudokujen ratkaistavissa olemisen tarkistamisesta huolehtiva luokka
  */
 public class Solver {
 
@@ -14,7 +14,7 @@ public class Solver {
     }
 
     /**
-     * Tarkistaminen, vastaako töysi generoitu sudokuruudukko oikein ratkaistua sudokuruudukkoa
+     * Tarkistaa vastaako töysi generoitu sudokuruudukko oikein ratkaistua sudokuruudukkoa
      * @param grid täysi sudokuruudukko matriisina
      * @return true jos ruudukko vastaa oiken ratkaistua sudokuruudukkoa, muuten false
      */

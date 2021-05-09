@@ -11,6 +11,9 @@ public class Grid {
     private Solver solver;
     private int emptyModules;
 
+    /**
+     * Alustaa oliomuuttujat ja generoi oliomuuttujaan grid ratkaistavissa olevan sudokuruudukon
+     */
     public Grid(Difficulty diff) {
         grid = new int[9][9];
         this.solver = new Solver();
@@ -30,7 +33,7 @@ public class Grid {
     }
 
     /**
-     * Tarkistaminen, onko kyseinen sudokuruudukko ratkaistu oikein
+     * Tarkistaa onko kyseinen sudokuruudukko ratkaistu oikein
      * @return true jos ratkaisu on oikea, muuten false
      */
     public boolean checkIfSolved() {
@@ -155,7 +158,7 @@ public class Grid {
     }
 
     /**
-     * Numeron asettaminen sudokuruudukon ruutuun
+     * Asettaa numeron sudokuruudukon ruutuun
      * @param a ruudun rivinumero
      * @param b ruudun sarakenumero
      * @param number asetettava numero

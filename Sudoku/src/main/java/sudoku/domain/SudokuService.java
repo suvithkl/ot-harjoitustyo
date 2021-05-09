@@ -24,7 +24,7 @@ public class SudokuService {
     }
 
     /**
-     * Uuden pelin aloittaminen
+     * Aloittaa uuden pelin
      * @param diff pelin vaikeustaso enumina
      * @see Difficulty
      * @return uusi generoitu sudokuruudukko
@@ -35,7 +35,7 @@ public class SudokuService {
     }
 
     /**
-     * Tarkistaminen, onko parhaillaan pelattava sudoku ratkaistu oikein
+     * Tarkistaa onko parhaillaan pelattava sudoku ratkaistu oikein
      * @return true jos ratkaisu on oikea, muuten false
      */
     public boolean checkGame() {
@@ -43,8 +43,8 @@ public class SudokuService {
     }
 
     /**
-     * Pelituloksen tallentaminen
-     * @param time pelatun pelin kesto muodossa 00:00
+     * Tallentaa pelituloksen
+     * @param time pelatun pelin kesto muodossa '00:00'
      * @return true jos pelituloksen tallentaminen onnistui, muuten false
      */
     public boolean saveGame(String time) {
@@ -59,7 +59,7 @@ public class SudokuService {
     }
 
     /**
-     * Numeron asettaminen ratkaistavan pelin sudokuruudukon ruutuun
+     * Asettaa numeron ratkaistavan pelin sudokuruudukon ruutuun
      * @param a ruudun rivinumero
      * @param b ruudun sarakenumero
      * @param number asetettava numero
@@ -71,8 +71,8 @@ public class SudokuService {
     }
 
     /**
-     * Ratkaistut sudokupelit
-     * @return ratkaistut sudokupelit
+     * Kaikki ratkaistut sudokupelit
+     * @return kaikki ratkaistut sudokupelit
      */
     public List<String> getSolved() {
         List<String> list = new ArrayList<>();
@@ -85,12 +85,12 @@ public class SudokuService {
     }
 
     /**
-     * Kirjautuminen sisään
+     * Kirjaa käyttäjän sisään
      * @param username käyttäjänimi
      * @return true jos käyttäjänimi on olemassa, muuten false
      */
     public boolean login(String username) {
-        User user = userDao.findUser(username);
+        User user = userDao.getByUsername(username);
         if (user == null) {
             return false;
         }
@@ -107,19 +107,19 @@ public class SudokuService {
     }
 
     /**
-     * Kirjautuminen ulos
+     * Kirjaa käyttäjän ulos
      */
     public void logout() {
         loggedIn = null;
     }
 
     /**
-     * Käyttäjän luominen
+     * Luo uuden käyttäjän
      * @param username käyttäjänimi
      * @return true jos käyttäjän luominen onnistui, muuten false
      */
     public boolean createUser(String username) {
-        if (userDao.findUser(username) != null) {
+        if (userDao.getByUsername(username) != null) {
             return false;
         }
         User user = new User(username);

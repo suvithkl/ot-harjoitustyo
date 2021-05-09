@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -29,6 +30,9 @@ import sudoku.dao.DatabaseHelper;
 import sudoku.domain.Difficulty;
 import sudoku.domain.SudokuService;
 
+/**
+ * Käyttöliittymästä huolehtiva luokka
+ */
 public class SudokuUi extends Application {
 
     private SudokuService sudokuService;
@@ -119,9 +123,6 @@ public class SudokuUi extends Application {
             list.add(parts[0] + "\t\t" + parts[1].substring(0, parts[1].length()-2) + ":"
                     + parts[1].substring(parts[1].length()-2) + "\t\t" + parts[2]);
         }
-        for (int i = 0; i < 30; i++) {
-            list.add("Username" + "\t" + i + i + ":" + i + i + "\t" + "diff");
-        }
         return list;
     }
 
@@ -140,6 +141,11 @@ public class SudokuUi extends Application {
         return true;
     }
 
+    /**
+     * Lataa konfiguroitavat tietokannan ominaisuudet config.properties tiedostosta, sekä
+     * alustaa tietokannan ja sovelluslogiikan ilmentymän eli olion SudokuService
+     * @throws Exception jos tiedoston tai tietokanna käsittely ei onnistu
+     */
     @Override
     public void init() throws Exception {
         Properties prop = new Properties();
@@ -159,13 +165,18 @@ public class SudokuUi extends Application {
         sudokuService = new SudokuService(userDao, gameDao);
     }
 
+    /**
+     * Luo käyttöliittymän ja avaa sovelluksen
+     * @param stage ainoa sovelluksen käyttämä stage-olio
+     */
     @Override
-    public void start(Stage stage) throws SQLException {
+    public void start(Stage stage) {
         // login scene
         VBox loginPane = new VBox(10);
         loginPane.setPadding(new Insets(20));
         loginPane.setAlignment(Pos.CENTER);
         loginPane.setSpacing(20);
+        loginPane.setStyle("-fx-background-color: #8AADAE;");
 
         Label loginTitle = new Label("SUDOKU");
         loginTitle.setFont(new Font(30));
@@ -224,7 +235,7 @@ public class SudokuUi extends Application {
         });
 
         loginPane.getChildren().addAll(loginTitle, loginBox, createBox, exitButton);
-        loginScene = new Scene(loginPane, 320, 480);
+        loginScene = new Scene(loginPane, 320, 480, Color.BLACK);
 
 
         // menu scene
@@ -232,6 +243,7 @@ public class SudokuUi extends Application {
         menuPane.setPadding(new Insets(20));
         menuPane.setAlignment(Pos.CENTER);
         menuPane.setSpacing(20);
+        menuPane.setStyle("-fx-background-color: #8AADAE;");
 
         Label menuTitle = new Label("SUDOKU");
         menuTitle.setFont(new Font(30));
@@ -276,6 +288,7 @@ public class SudokuUi extends Application {
         // game scene
         BorderPane gamePane = new BorderPane();
         gamePane.setPadding(new Insets(20));
+        gamePane.setStyle("-fx-background-color: #8AADAE;");
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10));
         grid.setVgap(10);
@@ -336,6 +349,7 @@ public class SudokuUi extends Application {
         statPane.setPadding(new Insets(20));
         statPane.setAlignment(Pos.CENTER);
         statPane.setSpacing(20);
+        statPane.setStyle("-fx-background-color: #8AADAE;");
 
         Label statTitle = new Label("SUDOKU");
         statTitle.setFont(new Font(30));
@@ -373,9 +387,15 @@ public class SudokuUi extends Application {
         stage.show();
     }
 
+    /**
+     * Sulkee sovelluksen
+     */
     @Override
     public void stop() { System.out.println("Closing Sudoku"); }
 
+    /**
+     * Käynnistää sovelluksen, "todellinen" pääohjelma
+     */
     public static void main(String[] args) {
         launch(args);
     }

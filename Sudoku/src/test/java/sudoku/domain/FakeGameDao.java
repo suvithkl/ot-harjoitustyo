@@ -12,10 +12,7 @@ public class FakeGameDao implements GameDao {
     public FakeGameDao(FakeUserDao users) { games.add(new Game(users.getAll().get(0), Difficulty.NORMAL)); }
 
     @Override
-    public Game save(Game game) throws SQLException {
-        games.add(game);
-        return game;
-    }
+    public void save(Game game) throws SQLException { games.add(game); }
 
     @Override
     public List<Game> getAll() { return games; }

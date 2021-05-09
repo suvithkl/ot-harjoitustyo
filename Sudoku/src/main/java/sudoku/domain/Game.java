@@ -17,7 +17,7 @@ public class Game {
     }
 
     /**
-     * Tarkistaminen, onko kyseinen sudokupeli ratkaistu oikein
+     * Tarkistaa onko kyseinen sudokupeli ratkaistu oikein
      * @return true jos ratkaisu on oikea, muuten false
      */
     public boolean checkIfSolved() {
@@ -50,7 +50,7 @@ public class Game {
     }
 
     /**
-     * Numeron asettaminen pelin sudokuruudukon ruutuun
+     * Asettaa numeron pelin sudokuruudukon ruutuun
      * @param a ruudun rivinumero
      * @param b ruudun sarakenumero
      * @param number asetettava numero
@@ -68,7 +68,7 @@ public class Game {
     }
 
     /**
-     * Pelin ratkaisemiseen käytetyn ajan asettaminen
+     * Asettaa pelin ratkaisemiseen käytetyn ajan
      * @param time peliaika merkkijonona
      */
     public void setTime(String time) {

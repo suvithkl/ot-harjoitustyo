@@ -6,16 +6,26 @@ import java.util.List;
 
 import sudoku.domain.User;
 
+/**
+ * Tietokantaan tallentava versio UserDao-rajapinnan toteuttavasta luokasta
+ */
 public class DBUserDao implements UserDao {
 
     private List<User> users;
     private DatabaseHelper db;
 
+    /**
+     * Alustaa oliomuuttujat ja hakee jo luodut käyttäjät tietokannasta users-listaan
+     */
     public DBUserDao(DatabaseHelper db) throws SQLException {
         users = new ArrayList<>();
         this.db = db;
+        fillUsersList();
+    }
+
+    private void fillUsersList() throws SQLException {
         db.connect();
-        ResultSet rs = db.getResultSet("SELECT * FROM User");
+        ResultSet rs = db.getResultSet("SELECT * FROM " + db.getUserTable());
         if (rs == null) {
             return;
         }
@@ -26,32 +36,35 @@ public class DBUserDao implements UserDao {
         db.disconnect();
     }
 
+    /**
+     * Luo eli tallentaa uuden käyttäjän tietokantaan
+     * @param user tallennettava käyttäjä
+     * @throws SQLException jos tallentaminen ei onnistu
+     */
     @Override
-    public User create(User user) throws SQLException {
+    public void create(User user) throws SQLException {
         db.connect();
-        db.updateDatabase("INSERT INTO User (name) VALUES (?)", user.getUsername());
+        db.addToDatabase("INSERT INTO " + db.getUserTable() + " (name) VALUES (?)", user.getUsername());
         db.disconnect();
         users.add(user);
-        return user;
     }
 
+    /**
+     * Kaikki tietokantaan luodut käyttäjät
+     * @return kaikki tietokantaan luodut käyttäjät
+     */
     @Override
     public List<User> getAll() {
         return users;
     }
 
+    /**
+     * Annettua käyttäjänimeä vastaava käyttäjä
+     * @param username käyttäjänimi
+     * @return annettua käyttäjänimeä vastaava käyttäjä jos käyttäjä on olemassa, muuten null
+     */
     @Override
     public User getByUsername(String username) {
         return users.stream().filter(u->u.getUsername().equals(username)).findFirst().orElse(null);
-    }
-
-    @Override
-    public User findUser(String username) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUsername().equals(username)) {
-                return users.get(i);
-            }
-        }
-        return null;
     }
 }
