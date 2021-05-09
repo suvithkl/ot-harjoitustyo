@@ -31,4 +31,5 @@
 |       | 4    | JavaDocin aloitus, dokumentaatiota, testejä |
 | 7.5.  | 5    | käyttöliittymää, pelitilastojen tallennusta, solverin yleistys |
 | 8.5.  | 3    | yleisiä korjauksia, käyttöliittymä |
-| yht.  | 92   |  |
+| 9.5.  | 4    | JavaDoc, konfiguraatioita |
+| yht.  | 96   |  |
