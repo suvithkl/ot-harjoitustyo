@@ -32,4 +32,5 @@
 | 7.5.  | 5    | käyttöliittymää, pelitilastojen tallennusta, solverin yleistys |
 | 8.5.  | 3    | yleisiä korjauksia, käyttöliittymä |
 | 9.5.  | 4    | JavaDoc, konfiguraatioita |
-| yht.  | 96   |  |
+| 10.5. | 4    | enum yleisemmäksi, koodin laatuparannuksia |
+| yht.  | 100  |  |
