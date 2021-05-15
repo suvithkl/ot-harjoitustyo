@@ -33,4 +33,5 @@
 | 8.5.  | 3    | yleisiä korjauksia, käyttöliittymä |
 | 9.5.  | 4    | JavaDoc, konfiguraatioita |
 | 10.5. | 4    | enum yleisemmäksi, koodin laatuparannuksia |
-| yht.  | 100  |  |
+| 15.5. | 4    | lisää testejä |
+| yht.  | 104  |  |
