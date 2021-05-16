@@ -5,7 +5,7 @@
 Sovelluksella käyttäjien on mahdollista pelata perinteistä 9x9-ruudukollista sudokua. Sovellukseen on mahdollista rekisteröidä useita käyttäjänimiä. Näihin käyttäjänimiin perustuen kerätään pelituloksia,
 ja pelaajat voivat sitten tarkastella omia parhaita tuloksiaan.
 
-Jos lataat sovelluksen releasesta jar-tiedostona, lataa myös _config.properties_-tiedosto.
+Jos lataat sovelluksen releasesta jar-tiedostona, lataa myös _config.properties_-tiedosto samaan kansioon.
 
 Sillä JetBrainsin [linja](https://intellij-support.jetbrains.com/hc/en-us/articles/206544839) projektintekohetkellä on, että kaikkia _.idea_-kansion tiedostoja _ei_ poisteta versionhallinnasta, projektin
 juureen on jätetty joitakin _.idea_-kansion tiedostoja [suositusten](https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore) mukaisesti (auto-import ei käytössä).
