@@ -48,10 +48,10 @@ public class DatabaseHelper {
      */
     public void disconnect() throws SQLException {
         db.close();
-        if (p != null) {
+        if (!(p.isClosed())) {
             p.close();
         }
-        if (rs != null) {
+        if (!(rs.isClosed())) {
             rs.close();
         }
     }
@@ -79,6 +79,12 @@ public class DatabaseHelper {
         return rs;
     }
 
+    public void closeresultSet() throws SQLException {
+        if (!(rs.isClosed())) {
+            rs.close();
+        }
+    }
+
     /**
      * Lisää tietoa tietokantaan.
      * @param statement tiedon lisäävä SQL-kielinen komento (INSERT INTO -lause) merkkijonona
@@ -89,6 +95,7 @@ public class DatabaseHelper {
         p = db.prepareStatement(statement);
         p.setString(1, value);
         p.executeUpdate();
+        p.close();
     }
 
     /**
@@ -105,6 +112,7 @@ public class DatabaseHelper {
         p.setString(2, value2);
         p.setString(3, value3);
         p.executeUpdate();
+        p.close();
     }
 
     public String getUserTable() {
