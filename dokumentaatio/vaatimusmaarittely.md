@@ -30,7 +30,7 @@ Siitä on mahdollista siirtyä pelinäkymään, eli itse sudokuun, tai pelitilas
   - Valittavissa on kolme eri vaikeustasoa (helppo, normaali ja vaikea)
   - Valittaessa jonkin näistä käyttäjälle generoidaan vaikeustasoa vastaava sudokuruudukko
   - Tämän jälkeen sudoku on ratkaistavissa
-  - Sen voi ratkaista valitsemalla ensin jonkin pelinäkymän numeronapeista ja sitten ruudukon ruutua klikkaamalla
+  - Sen voi ratkaista painamalla ensin haluttua ruudukon ruutua ja klikkaamalla sitten haluttua pelinäkymän numeronappia
   - Pelatessa nähtävillä on kello, joka kertoo paljonko aikaa on kulunut
 
 - Käyttäjä voi palata kesken pelin aloitusnäkymään
