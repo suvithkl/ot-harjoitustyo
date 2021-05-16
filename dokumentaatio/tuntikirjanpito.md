@@ -34,4 +34,5 @@
 | 9.5.  | 4    | JavaDoc, konfiguraatioita |
 | 10.5. | 4    | enum yleisemmäksi, koodin laatuparannuksia |
 | 15.5. | 4    | lisää testejä |
-| yht.  | 104  |  |
+|       | 5    | testejä, Grid-luokan jako kahteen luokkaan |
+| yht.  | 109  |  |
