@@ -34,6 +34,8 @@ Pakkauksen _sudoku.dao_ rajapintojen [UserDao](https://github.com/suvithkl/ot-ha
 
 ### Päätoiminnallisuudet
 
+Alla kuvataan kahta sovelluksen varsinaisiin toiminnallisuuksiin liittyvää päätoiminnallisuutta sekvenssikaavioiden avulla. 
+
 #### Pelin aloittaminen
 
 Painettaessa valikkonäkymän _PLAY_-nappia ohjelman kontrolli kulkeen alla olevan sekvenssikaavion mukaisesti.
@@ -42,11 +44,29 @@ Painettaessa valikkonäkymän _PLAY_-nappia ohjelman kontrolli kulkeen alla olev
 
 Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan luokan _SudokuService_ metodia _startGame_, joka aluksi luo uuden _Game_-olion, tälle annetaan parametriksi _User_-olio ja enum-tyyppinä vaikeustaso. Luodessa uusi _Game_-olio luodaan myös uusi _Grid_-olio, joka saa myös vaikeustason enum-tyyppisenä parametrikseen. _Grid_-olion luonti generoi uuden sudokuruudukon matriisin muotoon yksityisten metodien avulla. Sitten sovelluslogiikka kutsuu juuri luodun uuden pelin metodia _getGrid_, joka palauttaa juuri luodun _Grid_-olion _sudokuService_:lle, joka palauttaa sen käyttöliitymälle. Käyttöliittymä kutsuu palautetun sudokuruudukon metodia _getGrid_, joka palauttaa luodun ruudukon matriisina. Sitten käyttöliittymä generoi käyttäjälle näytettävän peliruudukon metodillaan _generateGrid_, jolle annetaan parametriksi _GridPane_-elementti ja palautettu matrsiisi. Lopuksi näkymä vaihdetaan pelinäkymään.
 
+#### Pelin tarkistaminen
+
+![chekGame-sekvenssikaavio](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/checkGame-skevenssi.png)
+
 ## Tietojen pysyväistallennus
 
-Pakkauksen _sudoku.dao_ luokkien _DBUserDao_ ja _DBGameDao_ avulla tallennetaan tietoja SQL-tietokantaan.
+Pakkauksen _sudoku.dao_ luokkien [DBUserDao](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/dao/DBUserDao.java) ja [DBGameDao](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/dao/DBGameDao.java) avulla tallennetaan tietoja SQL-tietokantaan.
+
+Kyseiset luokat on toteutettu DAO-suunnittelumallin mukaisesti. Siis sovelluslogiikka ei suoraan kutsu niitä ja sovelluksen tallennustapaa on mahdollista muuttaa, on vain tehtävä uudet toteutukset rajapinnoille [UserDao](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/dao/UserDao.java) ja [GameDao](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/dao/GameDao.java), sekä edellä mainitusti toinen konstruktori [SudokuService](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/domain/SudokuService.java)-luokalle.
+
+### Tietokanta
+
+Käyttäjät ja pelitulokset tallennetaan samaan SQL-tietokantaan, mutta omiin tauluihinsa. Tietokannan ja taulujen nimet ovat määritelty, ja uudelleen määriteltävissä, ohjelman konfiguraatiotiedoston [config.properties](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/config.properties) avulla.
+
+Käyttäjistä tallennetaan ainoastaan käyttäjänimi.
+
+Ratkaistuista sudokupeleistä tallennetaan peliaika sarakkeeseen _time_, vaikeustaso sarakkeeseen _difficulty_, sekä sudokun ratkaisseen pelaajan käyttäjänimi sarakkeeseen _name_. Sarakkeet ovat taulussa vastaavassa järjestyksessä.
+
+Itse tietokantaa käsitellään suoraan ainoastaan avustajaluokka [DatabaseHelper](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/dao/DatabaseHelper.java):n kautta, joka injektoidaan kummallekin DAO-rajapinnan toteuttavalle luokalle [SudokuService](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/domain/SudokuService.java):n toimesta. Näin tietokannan käsittely on saatu pelkistettyä DAO-luokissa yksinkertaisiksi metodikutsuiksi.
 
 ### Päätoiminnallisuudet
+
+Alla kuvataan yhtä tietojen tallentamiseen liittyvää päätoiminnallisuutta sekvenssikaavion avulla. Pelituloksen tallentaminen ([saveGame](https://github.com/suvithkl/ot-harjoitustyo/blob/bc399e1c08d08333d2d40fd7b9aa0cfed01697ed/Sudoku/src/main/java/sudoku/domain/SudokuService.java#L59)) noudattelee käytännössä samaa logiikkaa poissulkien alussa tehtävä käyttäjänimen uniikkiuden tarkistus.
 
 #### Uuden käyttäjän luonti
 
@@ -54,4 +74,8 @@ Syötettäessä uusi uniikki käyttäjätunnus kirjautumisnäkymän uuden käytt
 
 ![createUser-sekvenssikaavio](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/createUser-sekvenssi.png)
 
-Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan _SudokuService_-luokasta löytyvää metodia _createUser_, jolle annetaan parametriksi käyttäjänimi. _userDao_ tarkistaa onko käyttäjänimeä jo olemassa, ja palauttaa tuloksen sovelluslogiikalle. Jos annettu käyttäjänimi on uniikki eli uusi käyttäjä voidaan luoda, _sudokuService_ luo uuden _User_-olion, jolle annetaan parametrina käyttäjänimi. Sovelluslogiikka tallentaa uuden käyttäjän _UserDao_:n metodilla _create_, joka saa parametrina juuri luodun _User_-olion. Jos talletus onnistuu, palautetaan totuusarvo käyttöliittymälle. Lopuksi käyttöliittymä näytettää käyttäjälle ilmoituksen uuden käyttäjän onnistuneesta luonnista ja vaihtaa näkymäksi valikkonäkymän.
+Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan [SudokuService](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/domain/SudokuService.java)-luokasta löytyvää metodia [createUser](https://github.com/suvithkl/ot-harjoitustyo/blob/49c6775605e062466c1fead71f7e4f6542d47946/Sudoku/src/main/java/sudoku/domain/SudokuService.java#L125), jolle annetaan parametriksi käyttäjänimi. _userDao_ tarkistaa onko käyttäjänimeä jo olemassa, ja palauttaa tuloksen sovelluslogiikalle. Jos annettu käyttäjänimi on uniikki eli uusi käyttäjä voidaan luoda, _sudokuService_ luo uuden _User_-olion, jolle annetaan parametrina käyttäjänimi, joka palautetaan sovelluslogiikalle. Sovelluslogiikka tallentaa uuden käyttäjän _userDao_:n metodilla _create_, joka saa parametrina juuri luodun [User](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/domain/User.java)-olion. Jos talletus onnistuu, palautetaan totuusarvo käyttöliittymälle. Lopuksi käyttöliittymä näytettää käyttäjälle ilmoituksen uuden käyttäjän onnistuneesta luonnista ja vaihtaa näkymäksi valikkonäkymän.
+
+## Ohjelman rakenteen heikkoudet
+
+### Käyttöliittymä
