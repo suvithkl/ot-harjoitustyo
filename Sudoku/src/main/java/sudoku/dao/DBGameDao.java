@@ -9,7 +9,7 @@ import sudoku.domain.Game;
 import sudoku.domain.User;
 
 /**
- * Tietokantaan tallentava versio GameDao-rajapinnan toteuttavasta luokasta
+ * Tietokantaan tallentava versio GameDao-rajapinnan toteuttavasta luokasta.
  */
 public class DBGameDao implements GameDao {
 
@@ -17,7 +17,10 @@ public class DBGameDao implements GameDao {
     private final DatabaseHelper db;
 
     /**
-     * Alustaa oliomuuttujat ja hakee jo tallennetut pelit tietokannasta games-listaan
+     * Alustaa oliomuuttujat ja hakee jo tallennetut pelit tietokannasta games-listaan.
+     * @param db sovelluslogiikan käyttämä tietokanta-avustaja
+     * @param users sovelluslogiikan käyttämä UserDao
+     * @throws SQLException jos games-listaa ei saada alustettua tietokannasta
      */
     public DBGameDao(DatabaseHelper db, UserDao users) throws SQLException {
         games = new ArrayList<>();
@@ -46,7 +49,7 @@ public class DBGameDao implements GameDao {
     }
 
     /**
-     * Tallentaa pelituloksen (aika, vaikeustaso, käyttäjänimi) tietokantaan
+     * Tallentaa pelituloksen (aika, vaikeustaso, käyttäjänimi) tietokantaan.
      * @param game tallennettava peli
      * @throws SQLException jos tallentaminen ei onnistu
      */
@@ -60,7 +63,7 @@ public class DBGameDao implements GameDao {
     }
 
     /**
-     * Kaikki tietokantaan tallennetut pelit
+     * Kaikki tietokantaan tallennetut pelit.
      * @return kaikki tietokantaan tallennetut pelit
      */
     @Override

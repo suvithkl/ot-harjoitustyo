@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import sudoku.dao.*;
 
 /**
- * Sovelluslogiikasta huolehtiva luokka
+ * Sovelluslogiikasta huolehtiva luokka.
  */
 public class SudokuService {
 
@@ -18,6 +18,13 @@ public class SudokuService {
     private final GameDao gameDao;
     private Game beingSolved;
 
+    /**
+     * Alustaa sovelluslogiikan.
+     * @param dbUrl käytetyn tietokannan polku
+     * @param userTable tietokantataulun, johon tallennetaan käyttäjät, nimi
+     * @param gameTable tietokantataulun, johon tallennetaan pelit, nimi
+     * @throws SQLException jos DatabaseHelper-olion tai daojen alustus ei onnistu
+     */
     public SudokuService(String dbUrl, String userTable, String gameTable) throws SQLException {
         DatabaseHelper dbHelper = new DatabaseHelper(dbUrl, userTable, gameTable);
         this.userDao = new DBUserDao(dbHelper);
@@ -25,7 +32,7 @@ public class SudokuService {
     }
 
     /**
-     * Aloittaa uuden pelin
+     * Aloittaa uuden pelin.
      * @param difficulty pelin vaikeustaso merkkijonona
      * @see Difficulty
      * @return uusi generoitu sudokuruudukko
@@ -37,7 +44,7 @@ public class SudokuService {
     }
 
     /**
-     * Tarkistaa onko parhaillaan pelattava sudoku ratkaistu oikein
+     * Tarkistaa onko parhaillaan pelattava sudoku ratkaistu oikein.
      * @return true jos ratkaisu on oikea, muuten false
      */
     public boolean checkGame() {
@@ -45,7 +52,7 @@ public class SudokuService {
     }
 
     /**
-     * Tallentaa pelituloksen
+     * Tallentaa pelituloksen.
      * @param time pelatun pelin kesto muodossa '00:00'
      * @throws Exception jos pelin tallentaminen ei onnistu
      */
@@ -55,7 +62,7 @@ public class SudokuService {
     }
 
     /**
-     * Asettaa numeron ratkaistavan pelin sudokuruudukon ruutuun
+     * Asettaa numeron ratkaistavan pelin sudokuruudukon ruutuun.
      * @param a ruudun rivinumero
      * @param b ruudun sarakenumero
      * @param number asetettava numero
@@ -67,7 +74,7 @@ public class SudokuService {
     }
 
     /**
-     * Kaikki ratkaistut sudokupelit
+     * Kaikki ratkaistut sudokupelit.
      * @return kaikki ratkaistut sudokupelit
      */
     public List<String> getSolved() {
@@ -81,7 +88,7 @@ public class SudokuService {
     }
 
     /**
-     * Kirjaa käyttäjän sisään
+     * Kirjaa käyttäjän sisään.
      * @param username käyttäjänimi
      * @return true jos käyttäjänimi on olemassa, muuten false
      */
@@ -95,7 +102,7 @@ public class SudokuService {
     }
 
     /**
-     * Kirjautunut käyttäjä
+     * Kirjautunut käyttäjä.
      * @return kirjautunut käyttäjä
      */
     public User getLoggedIn() {
@@ -103,14 +110,14 @@ public class SudokuService {
     }
 
     /**
-     * Kirjaa käyttäjän ulos
+     * Kirjaa käyttäjän ulos.
      */
     public void logout() {
         loggedIn = null;
     }
 
     /**
-     * Luo uuden käyttäjän
+     * Luo uuden käyttäjän.
      * @param username käyttäjänimi
      * @return true jos käyttäjän luominen onnistui, muuten false
      * @throws Exception jos uuden käyttäjän luominen ei onnistu tallentamisvirheen vuoksi

@@ -7,7 +7,7 @@ import java.util.List;
 import sudoku.domain.User;
 
 /**
- * Tietokantaan tallentava versio UserDao-rajapinnan toteuttavasta luokasta
+ * Tietokantaan tallentava versio UserDao-rajapinnan toteuttavasta luokasta.
  */
 public class DBUserDao implements UserDao {
 
@@ -15,7 +15,9 @@ public class DBUserDao implements UserDao {
     private final DatabaseHelper db;
 
     /**
-     * Alustaa oliomuuttujat ja hakee jo luodut käyttäjät tietokannasta users-listaan
+     * Alustaa oliomuuttujat ja hakee jo luodut käyttäjät tietokannasta users-listaan.
+     * @param db sovelluslogiikan käyttämä tietokanta-avustaja
+     * @throws SQLException jos users-listaa ei saada alustettua tietokannasta
      */
     public DBUserDao(DatabaseHelper db) throws SQLException {
         users = new ArrayList<>();
@@ -38,7 +40,7 @@ public class DBUserDao implements UserDao {
     }
 
     /**
-     * Luo eli tallentaa uuden käyttäjän tietokantaan
+     * Luo eli tallentaa uuden käyttäjän tietokantaan.
      * @param user tallennettava käyttäjä
      * @throws SQLException jos tallentaminen ei onnistu
      */
@@ -51,7 +53,7 @@ public class DBUserDao implements UserDao {
     }
 
     /**
-     * Kaikki tietokantaan luodut käyttäjät
+     * Kaikki tietokantaan luodut käyttäjät.
      * @return kaikki tietokantaan luodut käyttäjät
      */
     @Override
@@ -60,7 +62,7 @@ public class DBUserDao implements UserDao {
     }
 
     /**
-     * Annettua käyttäjänimeä vastaava käyttäjä
+     * Annettua käyttäjänimeä vastaava käyttäjä.
      * @param username käyttäjänimi
      * @return annettua käyttäjänimeä vastaava käyttäjä jos käyttäjä on olemassa, muuten null
      */

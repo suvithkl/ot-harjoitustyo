@@ -1,7 +1,7 @@
 package sudoku.domain;
 
 /**
- * Sudokun peliruudukkoa edustava luokka
+ * Sudokun peliruudukkoa edustava luokka.
  */
 public class Grid {
 
@@ -9,7 +9,8 @@ public class Grid {
     private final int emptyModules;
 
     /**
-     * Alustaa oliomuuttujat ja generoi oliomuuttujaan grid ratkaistavissa olevan sudokuruudukon
+     * Alustaa oliomuuttujat ja generoi oliomuuttujaan grid ratkaistavissa olevan sudokuruudukon.
+     * @param diff sudokuruudukon vaikeustaso
      */
     public Grid(Difficulty diff) {
         grid = new int[9][9];
@@ -29,7 +30,7 @@ public class Grid {
     }
 
     /**
-     * Tarkistaa onko kyseinen sudokuruudukko ratkaistu oikein
+     * Tarkistaa onko kyseinen sudokuruudukko ratkaistu oikein.
      * @return true jos ratkaisu on oikea, muuten false
      */
     public boolean checkIfSolved() {
@@ -37,7 +38,7 @@ public class Grid {
     }
 
     /**
-     * Sudokuruudukko
+     * Sudokuruudukko.
      * @return sudokuruudukko matriisina
      */
     public int[][] getGrid() {
@@ -45,7 +46,7 @@ public class Grid {
     }
 
     /**
-     * Asettaa numeron sudokuruudukon ruutuun
+     * Asettaa numeron sudokuruudukon ruutuun.
      * @param a ruudun rivinumero
      * @param b ruudun sarakenumero
      * @param number asetettava numero
@@ -55,7 +56,7 @@ public class Grid {
     }
 
     /**
-     * Sudokuruudukko ja sen sisältämät numerot merkkijonona
+     * Sudokuruudukko ja sen sisältämät numerot merkkijonona.
      * @return sudokuruudukko ja sen sisältämät numerot merkkijonona
      */
     @Override

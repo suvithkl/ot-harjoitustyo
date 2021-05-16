@@ -3,12 +3,12 @@ package sudoku.domain;
 import java.util.Random;
 
 /**
- * Sudokun peliruudukkojen luomisesta eli täyttämisestä huolehtiva luokka
+ * Sudokun peliruudukkojen luomisesta eli täyttämisestä huolehtiva luokka.
  */
 public class GridCreator {
 
     /**
-     * Täyttää sudokuruudukon sudokun sääntöjen mukaisesti
+     * Täyttää sudokuruudukon sudokun sääntöjen mukaisesti.
      * (eli sama numero ilmestyy vain kerran per rivi, sarake ja 3x3 osaruudukko)
      * Yksinkertaisin mahdollinen täyttö eli siirretään numerojärjestyksessä olevia rivejä aina hieman vaakasuunnassa
      * rivi kerrallaan (ks. test.domain.GridCreatorTest missä kyseinen ruudukko on muuttujataulukko baseGrid)
@@ -37,7 +37,7 @@ public class GridCreator {
     }
 
     /**
-     * Sekoittaa rivien tai sarakkeiden järjestyksen per kolmen rivin tai sarakkeen ryhmä
+     * Sekoittaa rivien tai sarakkeiden järjestyksen per kolmen rivin tai sarakkeen ryhmä.
      * @param type jos sekoitetaan rivit niin "row", jos kolumnit niin "column"
      * @param grid sudokuruudukko matriisina
      */
@@ -81,8 +81,9 @@ public class GridCreator {
     }
 
     /**
-     * Muodostaa ruudukosta (eli matriisista) transpoosin satunnaisuuden lisäämiseksi
+     * Muodostaa ruudukosta (eli matriisista) transpoosin satunnaisuuden lisäämiseksi.
      * @param grid sudokuruudukko matriisina
+     * @return sudokuruudukosta tehty transpoosi
      */
     public static int[][] transpose(int[][] grid) {
         int[][] tempGrid = new int[9][9];
@@ -95,7 +96,7 @@ public class GridCreator {
     }
 
     /**
-     * Tyhjentää vaikeustason määräämän määrän sudokuruudukon ruutuja
+     * Tyhjentää vaikeustason määräämän määrän sudokuruudukon ruutuja.
      * @param emptyModules montako ruutua vaikeustaso määrää tyhjentämään
      * @param grid sudokuruudukko matriisina
      */

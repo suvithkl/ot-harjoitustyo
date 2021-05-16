@@ -1,12 +1,16 @@
 package sudoku.domain;
 
 /**
- * Sovelluksen käyttäjää edustava luokka
+ * Sovelluksen käyttäjää edustava luokka.
  */
 public class User {
 
     private final String username;
 
+    /**
+     * Alustaa käyttäjä-olion.
+     * @param username käyttäjänimi
+     */
     public User(String username) {
         this.username = username;
     }
@@ -16,7 +20,7 @@ public class User {
     }
 
     /**
-     * Vertailee ovatko kaksi käyttäjää samat
+     * Vertailee ovatko kaksi käyttäjää samat.
      * @param obj toinen käyttäjä johon kyseistä käyttäjää verrataan
      * @return true jos käyttäjänimet ovat samat, muuten false
      * @see Object#equals(Object)

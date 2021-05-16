@@ -1,7 +1,7 @@
 package sudoku.domain;
 
 /**
- * Sudokujen ratkaistavissa olemisen tarkistamisesta huolehtiva luokka
+ * Sudokujen ratkaistavissa olemisen tarkistamisesta huolehtiva luokka.
  */
 public class GridSolver {
 
@@ -9,7 +9,7 @@ public class GridSolver {
     private static int currentColumn;
 
     /**
-     * Tarkistaa vastaako töysi generoitu sudokuruudukko oikein ratkaistua sudokuruudukkoa
+     * Tarkistaa vastaako töysi generoitu sudokuruudukko oikein ratkaistua sudokuruudukkoa.
      * @param grid täysi sudokuruudukko matriisina
      * @return true jos ruudukko vastaa oiken ratkaistua sudokuruudukkoa, muuten false
      */

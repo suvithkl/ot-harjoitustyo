@@ -1,7 +1,7 @@
 package sudoku.domain;
 
 /**
- * Sudokupeliä edustava luokka
+ * Sudokupeliä edustava luokka.
  */
 public class Game {
 
@@ -10,6 +10,11 @@ public class Game {
     private final Difficulty difficulty;
     private String time;
 
+    /**
+     * Alustaa sudokupeli-olion.
+     * @param user peliä ratkaiseva pelaaja
+     * @param diff pelin vaikeustaso
+     */
     public Game(User user, Difficulty diff) {
         this.user = user;
         this.grid = new Grid(diff);
@@ -17,7 +22,7 @@ public class Game {
     }
 
     /**
-     * Tarkistaa onko kyseinen sudokupeli ratkaistu oikein
+     * Tarkistaa onko kyseinen sudokupeli ratkaistu oikein.
      * @return true jos ratkaisu on oikea, muuten false
      */
     public boolean checkIfSolved() {
@@ -25,7 +30,7 @@ public class Game {
     }
 
     /**
-     * Pelin sudokuruudukko
+     * Pelin sudokuruudukko.
      * @return pelin sudokuruudukko
      */
     public Grid getGrid() {
@@ -33,7 +38,7 @@ public class Game {
     }
 
     /**
-     * Pelin vaikeustaso
+     * Pelin vaikeustaso.
      * @return pelin vaikeustaso
      * @see Difficulty
      */
@@ -42,7 +47,7 @@ public class Game {
     }
 
     /**
-     * Peliä ratkaiseva pelaaja
+     * Peliä ratkaiseva pelaaja.
      * @return peliä ratkaiseva pelaaja
      */
     public User getUser() {
@@ -50,7 +55,7 @@ public class Game {
     }
 
     /**
-     * Asettaa numeron pelin sudokuruudukon ruutuun
+     * Asettaa numeron pelin sudokuruudukon ruutuun.
      * @param a ruudun rivinumero
      * @param b ruudun sarakenumero
      * @param number asetettava numero
@@ -60,7 +65,7 @@ public class Game {
     }
 
     /**
-     * Pelin ratkaisemiseen käytetty aika
+     * Pelin ratkaisemiseen käytetty aika.
      * @return peliaika merkkijonona
      */
     public String getTime() {
@@ -68,7 +73,7 @@ public class Game {
     }
 
     /**
-     * Asettaa pelin ratkaisemiseen käytetyn ajan
+     * Asettaa pelin ratkaisemiseen käytetyn ajan.
      * @param time peliaika merkkijonona
      */
     public void setTime(String time) {

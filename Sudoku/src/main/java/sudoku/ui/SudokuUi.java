@@ -192,6 +192,7 @@ public class SudokuUi extends Application {
         loginBox.setPadding(new Insets(10));
         Label loginLabel = new Label("Sign in:");
         TextField loginInput = new TextField("username");
+
         Button loginButton = new Button("OK");
         loginButton.setOnAction(e->{
             String username = loginInput.getText();
@@ -205,12 +206,14 @@ public class SudokuUi extends Application {
                 loginInput.setText("");
             }
         });
+
         loginBox.getChildren().addAll(loginLabel, loginInput, loginButton);
 
         VBox createBox = new VBox(10);
         createBox.setPadding(new Insets(10));
         Label createLabel = new Label("Create new user:");
         TextField createInput = new TextField();
+
         Button createButton = new Button("OK");
         createButton.setOnAction(e->{
             String username = createInput.getText();
@@ -230,6 +233,7 @@ public class SudokuUi extends Application {
             }
             createInput.setText("");
         });
+
         createBox.getChildren().addAll(createLabel, createInput, createButton);
 
         Button exitButton = new Button("EXIT");
@@ -269,15 +273,18 @@ public class SudokuUi extends Application {
         VBox sceneChangeBox = new VBox(10);
         sceneChangeBox.setPadding(new Insets(10));
         sceneChangeBox.setAlignment(Pos.CENTER);
+
         Button statsButton = new Button("STATS");
         statsButton.setOnAction(e->{
             if (setStatLists()) stage.setScene(statScene);
         });
+
         Button logoutButton = new Button("LOG OUT");
         logoutButton.setOnAction(e->{
             sudokuService.logout();
             stage.setScene(loginScene);
         });
+
         sceneChangeBox.getChildren().addAll(statsButton, logoutButton);
 
         menuPane.getChildren().addAll(menuTitle, playBox, sceneChangeBox);
@@ -288,6 +295,7 @@ public class SudokuUi extends Application {
         BorderPane gamePane = new BorderPane();
         gamePane.setPadding(new Insets(20));
         gamePane.setStyle("-fx-background-color: #8AADAE;");
+
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10));
         grid.setVgap(10);
@@ -297,12 +305,14 @@ public class SudokuUi extends Application {
         VBox box = new VBox(10);
         box.setPadding(new Insets(10));
         box.setAlignment(Pos.CENTER);
+
         clock = new Label("");
         clock.setFont(new Font(15));
 
         HBox numberBox = new HBox(10);
         numberBox.setAlignment(Pos.CENTER);
         generateNumberButtons(numberBox);
+
         HBox toolBox = new HBox(10);
         toolBox.setPadding(new Insets(10));
         toolBox.setAlignment(Pos.CENTER);
@@ -312,6 +322,7 @@ public class SudokuUi extends Application {
             if (sudokuService.checkGame()) saveGame(stage);
             else informSolvedIncorrectly(stage);
         });
+        
         Button menuButton = new Button("MENU");
         menuButton.setOnAction(e->{
             timeline.stop();

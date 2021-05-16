@@ -3,7 +3,7 @@ package sudoku.dao;
 import java.sql.*;
 
 /**
- * Tietokannan käytöstä huolehtiva avustajaluokka
+ * Tietokannan käytöstä huolehtiva avustajaluokka.
  */
 public class DatabaseHelper {
 
@@ -16,7 +16,10 @@ public class DatabaseHelper {
 
     /**
      * Alustaa oliomuuttujat (paitsi p (PreparedStatement) ja rs (ResultSet) ),
-     * sekä luo tietokannan taulut jos niitä ei ole olemassa
+     * sekä luo tietokannan taulut jos niitä ei ole olemassa.
+     * @param dbUrl käytetyn tietokannan polku
+     * @param  userTable tietokantataulun, johon tallennetaan käyttäjät, nimi
+     * @param  gameTable tietokantataulun, johon tallennetaan pelit, nimi
      * @throws SQLException jos yhteyden muodostus tai taulujen alustus ei onnistu
      */
     public DatabaseHelper(String dbUrl, String userTable, String gameTable) throws SQLException {
@@ -29,7 +32,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Luo yhteyden tietokantaan ja asettaa kyseisen yhteyden oliomuuttujaksi db
+     * Luo yhteyden tietokantaan ja asettaa kyseisen yhteyden oliomuuttujaksi db.
      * @throws SQLException jos yhteyden muodostus ei onnistu
      */
     public void connect() throws SQLException {
@@ -40,7 +43,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Katkaisee yhteyden tietokantaan, sekä tarvittaessa oliomuuttujiin p (PreparedStatement) ja rs (ResultSet)
+     * Katkaisee yhteyden tietokantaan, sekä tarvittaessa oliomuuttujiin p (PreparedStatement) ja rs (ResultSet).
      * @throws SQLException jos yhteyden muodostus ei onnistu
      */
     public void disconnect() throws SQLException {
@@ -64,7 +67,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Annetulla kyselyllö tietokannan tuottama taulu
+     * Annetulla kyselyllö tietokannan tuottama taulu.
      * @param statement kysely merkkijonona
      * @return annetulla kyselyllö tietokannan tuottama taulu
      * @throws SQLException jos kyselyn tekeminen ei onnistu
@@ -77,7 +80,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Lisää tietoa tietokantaan
+     * Lisää tietoa tietokantaan.
      * @param statement tiedon lisäävä SQL-kielinen komento (INSERT INTO -lause) merkkijonona
      * @param value lisättävä arvo
      * @throws SQLException jos tiedon lisääminen ei onnistu
@@ -89,7 +92,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Lisää tietoa tietokantaan
+     * Lisää tietoa tietokantaan.
      * @param statement tiedon lisäävä SQL-kielinen komento (INSERT INTO -lause) merkkijonona
      * @param value1 lisättävä arvo
      * @param value2 lisättävä arvo

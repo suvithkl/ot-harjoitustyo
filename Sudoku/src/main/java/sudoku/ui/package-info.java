@@ -1,5 +1,5 @@
 /**
- * Käyttöliittymä
+ * Käyttöliittymä.
  */
 
 package sudoku.ui;

@@ -1,7 +1,7 @@
 package sudoku.domain;
 
 /**
- * Pelin vaikeustasoa edustava enum
+ * Pelin vaikeustasoa edustava enum.
  */
 public enum Difficulty {
     EASY (40),
@@ -19,7 +19,7 @@ public enum Difficulty {
     }
 
     /**
-     * Muuntaa vaikeustason merkkijonosta Difficulty-enumiksi
+     * Muuntaa vaikeustason merkkijonosta Difficulty-enumiksi.
      * @param diff vaikeustaso merkkijonona
      * @return vaikeustaso enumina
      * @see Difficulty
