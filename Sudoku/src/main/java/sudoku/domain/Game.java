@@ -5,9 +5,9 @@ package sudoku.domain;
  */
 public class Game {
 
-    private User user;
+    private final User user;
     private Grid grid;
-    private Difficulty difficulty;
+    private final Difficulty difficulty;
     private String time;
 
     public Game(User user, Difficulty diff) {

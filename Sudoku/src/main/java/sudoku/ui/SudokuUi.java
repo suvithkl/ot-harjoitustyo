@@ -24,10 +24,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import sudoku.dao.DBGameDao;
-import sudoku.dao.DBUserDao;
-import sudoku.dao.DatabaseHelper;
-import sudoku.domain.Difficulty;
 import sudoku.domain.SudokuService;
 
 /**
@@ -36,23 +32,33 @@ import sudoku.domain.SudokuService;
 public class SudokuUi extends Application {
 
     private SudokuService sudokuService;
+    private Alert alert;
+
     private GridPane grid = new GridPane();
     private Button[][] gridButtons;
-    private Button[] numButtons;
     private int[] chosenModule = new int[2];
 
     private Label clock;
     private int min, sec;
     private Timeline timeline;
-    ListView ownStatList;
-    ListView statList;
+    private ListView<Object> ownStatList;
+    private ListView<Object> statList;
 
     private Scene loginScene;
     private Scene menuScene;
     private Scene gameScene;
     private Scene statScene;
 
-    private void generateGrid(GridPane grid, int[][] values) {
+    private boolean createUser(String username) {
+        try {
+            if (sudokuService.createUser(username)) return true;
+        } catch (Exception e) {
+            errorHandler();
+        }
+        return false;
+    }
+
+    private void generateGrid(int[][] values) {
         gridButtons = new Button[9][9];
         Font fontEmpty = Font.font(15);
         Font fontFixed = Font.font(null, FontWeight.BOLD, 15);
@@ -62,25 +68,25 @@ public class SudokuUi extends Application {
                 if (values[i][j] == 0) {
                     button.setFont(fontEmpty);
                     button.setText("  ");
+                    int a = i;
+                    int b = j;
+                    button.setOnAction(e->{
+                        chosenModule[0] = a;
+                        chosenModule[1] = b;
+                    });
                 }
                 else {
                     button.setFont(fontFixed);
                     button.setText(Integer.toString(values[i][j]));
                 }
                 gridButtons[i][j] = button;
-                int a = i;
-                int b = j;
-                gridButtons[i][j].setOnAction(e->{
-                    chosenModule[0] = a;
-                    chosenModule[1] = b;
-                });
                 grid.add(gridButtons[i][j], i, j);
             }
         }
     }
 
     private void generateNumberButtons(HBox numberBox) {
-        numButtons = new Button[9];
+        Button[] numButtons = new Button[9];
         Font font = Font.font(15);
         for (int i = 0; i < 9; i++) {
             int number = i + 1;
@@ -95,8 +101,8 @@ public class SudokuUi extends Application {
         }
     }
 
-    private void startGame(Stage stage, Difficulty diff) {
-        generateGrid(grid, sudokuService.startGame(diff).getGrid());
+    private void startGame(Stage stage, String difficulty) {
+        generateGrid(sudokuService.startGame(difficulty).getGrid());
         startClock();
         stage.setScene(gameScene);
     }
@@ -116,19 +122,36 @@ public class SudokuUi extends Application {
         timeline.play();
     }
 
-    private ObservableList fillStatList() throws SQLException {
-        ObservableList list = FXCollections.observableArrayList();
-        for (String s : sudokuService.getSolved()) {
-            String[] parts = s.split(";");
-            list.add(parts[0] + "\t\t" + parts[1].substring(0, parts[1].length()-2) + ":"
-                    + parts[1].substring(parts[1].length()-2) + "\t\t" + parts[2]);
+    private void saveGame(Stage stage) {
+        timeline.stop();
+        try {
+            sudokuService.saveGame(Integer.toString(min) + sec);
+            alert.setContentText("Sudoku solved successfully in " + min + ":" + sec + ".\nCongratulations "
+                    + sudokuService.getLoggedIn().getUsername() + "!");
+            alert.showAndWait();
+            stage.setScene(menuScene);
+        } catch (Exception ex) {
+            errorHandler();
         }
-        return list;
     }
 
+    private void informSolvedIncorrectly(Stage stage) {
+        Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "Sudoku solved incorrectly.\nDo you want to keep trying?",
+                ButtonType.YES, ButtonType.NO);
+        alert2.setTitle(null);
+        alert2.setHeaderText(null);
+        alert2.showAndWait();
+        if (alert2.getResult() == ButtonType.YES) alert2.close();
+        else if (alert2.getResult() == ButtonType.NO) {
+            timeline.stop();
+            stage.setScene(menuScene);
+        }
+    }
+
+    // Täyttää pelitulokset sekä pelkkien omien tulosten listaan, että kaikkien tulosten listaan
     private boolean setStatLists() {
         try {
-            ObservableList list = FXCollections.observableArrayList();
+            ObservableList<Object> list = FXCollections.observableArrayList();
             for (Object o : fillStatList()) {
                 String[] parts = o.toString().split("\t");
                 if (parts[0].equals(sudokuService.getLoggedIn().getUsername())) list.add(o);
@@ -141,37 +164,17 @@ public class SudokuUi extends Application {
         return true;
     }
 
-    /**
-     * Lataa konfiguroitavat tietokannan ominaisuudet config.properties tiedostosta, sekä
-     * alustaa tietokannan ja sovelluslogiikan ilmentymän eli olion SudokuService
-     * @throws Exception jos tiedoston tai tietokanna käsittely ei onnistu
-     */
-    @Override
-    public void init() throws Exception {
-        Properties prop = new Properties();
-        prop.load(new FileInputStream("config.properties"));
-        String sudokuDB = prop.getProperty("sudokuDB");
-        String userTable = prop.getProperty("userTable");
-        String gameTable = prop.getProperty("gameTable");
-
-        String userWorkingDir = System.getProperty("user.dir");
-        String fileSeparator = System.getProperty("file.separator");
-        String dbUrl = "jdbc:sqlite:" + userWorkingDir + fileSeparator + sudokuDB;
-
-        DatabaseHelper dbHelper = new DatabaseHelper(dbUrl, userTable, gameTable);
-        DBUserDao userDao = new DBUserDao(dbHelper);
-        DBGameDao gameDao = new DBGameDao(dbHelper, userDao);
-
-        sudokuService = new SudokuService(userDao, gameDao);
+    private ObservableList<Object> fillStatList() throws SQLException {
+        ObservableList<Object> list = FXCollections.observableArrayList();
+        for (String s : sudokuService.getSolved()) {
+            String[] parts = s.split(";");
+            list.add(parts[0] + "\t\t" + parts[1].substring(0, parts[1].length()-2) + ":"
+                    + parts[1].substring(parts[1].length()-2) + "\t\t" + parts[2]);
+        }
+        return list;
     }
 
-    /**
-     * Luo käyttöliittymän ja avaa sovelluksen
-     * @param stage ainoa sovelluksen käyttämä stage-olio
-     */
-    @Override
-    public void start(Stage stage) {
-        // login scene
+    private void createLoginScene(Stage stage) {
         VBox loginPane = new VBox(10);
         loginPane.setPadding(new Insets(20));
         loginPane.setAlignment(Pos.CENTER);
@@ -181,7 +184,7 @@ public class SudokuUi extends Application {
         Label loginTitle = new Label("SUDOKU");
         loginTitle.setFont(new Font(30));
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(null);
         alert.setHeaderText(null);
 
@@ -217,7 +220,7 @@ public class SudokuUi extends Application {
             } else if (username.contains("\"") || username.contains("'") || username.contains("*")) {
                 alert.setContentText("Username must not contain quotation marks nor asterisks.");
                 alert.showAndWait();
-            } else if (sudokuService.createUser(username)) {
+            } else if (createUser(username)) {
                 alert.setContentText("New user created.\nWelcome " + username + "!");
                 alert.showAndWait();
                 stage.setScene(menuScene);
@@ -230,15 +233,13 @@ public class SudokuUi extends Application {
         createBox.getChildren().addAll(createLabel, createInput, createButton);
 
         Button exitButton = new Button("EXIT");
-        exitButton.setOnAction(e->{
-            Platform.exit();
-        });
+        exitButton.setOnAction(e-> Platform.exit());
 
         loginPane.getChildren().addAll(loginTitle, loginBox, createBox, exitButton);
         loginScene = new Scene(loginPane, 320, 480, Color.BLACK);
+    }
 
-
-        // menu scene
+    private void createMenuScene(Stage stage) {
         VBox menuPane = new VBox(10);
         menuPane.setPadding(new Insets(20));
         menuPane.setAlignment(Pos.CENTER);
@@ -253,18 +254,16 @@ public class SudokuUi extends Application {
         playBox.setAlignment(Pos.CENTER);
         Label playTitle = new Label("Start a new game");
         playTitle.setFont(new Font(15));
+
         Button easyButton = new Button("EASY");
-        easyButton.setOnAction(e->{
-            startGame(stage, Difficulty.EASY);
-        });
+        easyButton.setOnAction(e-> startGame(stage, easyButton.getText()));
+
         Button normalButton = new Button("NORMAL");
-        normalButton.setOnAction(e->{
-            startGame(stage, Difficulty.NORMAL);
-        });
+        normalButton.setOnAction(e-> startGame(stage, normalButton.getText()));
+
         Button hardButton = new Button("HARD");
-        hardButton.setOnAction(e->{
-            startGame(stage, Difficulty.HARD);
-        });
+        hardButton.setOnAction(e-> startGame(stage, hardButton.getText()));
+
         playBox.getChildren().addAll(playTitle, easyButton, normalButton, hardButton);
 
         VBox sceneChangeBox = new VBox(10);
@@ -283,9 +282,9 @@ public class SudokuUi extends Application {
 
         menuPane.getChildren().addAll(menuTitle, playBox, sceneChangeBox);
         menuScene = new Scene(menuPane, 320, 480);
+    }
 
-
-        // game scene
+    private void createGameScene(Stage stage) {
         BorderPane gamePane = new BorderPane();
         gamePane.setPadding(new Insets(20));
         gamePane.setStyle("-fx-background-color: #8AADAE;");
@@ -293,7 +292,7 @@ public class SudokuUi extends Application {
         grid.setPadding(new Insets(10));
         grid.setVgap(10);
         grid.setHgap(10);
-        generateGrid(grid, new int[9][9]);
+        generateGrid(new int[9][9]);
 
         VBox box = new VBox(10);
         box.setPadding(new Insets(10));
@@ -310,25 +309,8 @@ public class SudokuUi extends Application {
 
         Button checkButton = new Button("CHECK");
         checkButton.setOnAction(e->{
-            if (sudokuService.checkGame()) {
-                timeline.stop();
-                sudokuService.saveGame(Integer.toString(min) + sec);
-                alert.setContentText("Sudoku solved successfully in " + min + ":" + sec + ".\nCongratulations "
-                        + sudokuService.getLoggedIn().getUsername() + "!");
-                alert.showAndWait();
-                stage.setScene(menuScene);
-            } else {
-                Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "Sudoku solved incorrectly.\nDo you want to keep trying?",
-                        ButtonType.YES, ButtonType.NO);
-                alert2.setTitle(null);
-                alert2.setHeaderText(null);
-                alert2.showAndWait();
-                if (alert2.getResult() == ButtonType.YES) alert2.close();
-                else if (alert2.getResult() == ButtonType.NO) {
-                    timeline.stop();
-                    stage.setScene(menuScene);
-                }
-            }
+            if (sudokuService.checkGame()) saveGame(stage);
+            else informSolvedIncorrectly(stage);
         });
         Button menuButton = new Button("MENU");
         menuButton.setOnAction(e->{
@@ -342,9 +324,9 @@ public class SudokuUi extends Application {
         gamePane.setCenter(grid);
         gamePane.setBottom(box);
         gameScene = new Scene(gamePane, 480, 640);
+    }
 
-
-        // statistics scene
+    private void createStatisticsScene(Stage stage) {
         VBox statPane = new VBox(10);
         statPane.setPadding(new Insets(20));
         statPane.setAlignment(Pos.CENTER);
@@ -363,9 +345,9 @@ public class SudokuUi extends Application {
         statLabels.getChildren().addAll(ownLabel, allLabel);
 
         HBox statLists = new HBox(10);
-        ownStatList = new ListView();
+        ownStatList = new ListView<>();
         ownStatList.setPadding(new Insets(10));
-        statList = new ListView();
+        statList = new ListView<>();
         statList.setPadding(new Insets(10));
         statLists.getChildren().addAll(ownStatList, statList);
 
@@ -373,18 +355,60 @@ public class SudokuUi extends Application {
         statBox.getChildren().addAll(statLabels, statLists);
 
         Button backButton = new Button("MENU");
-        backButton.setOnAction(e->{
-            stage.setScene(menuScene);
-        });
+        backButton.setOnAction(e-> stage.setScene(menuScene));
 
         statPane.getChildren().addAll(statTitle, statBox, backButton);
         statScene = new Scene(statPane, 480, 640);
+    }
 
-
-        // setup
+    private void setup(Stage stage) {
         stage.setTitle("Sudoku");
         stage.setScene(loginScene);
         stage.show();
+    }
+
+    // Kaikki mahdolliset poikkeukset heitetään lopulta SudokuServicelle, joka heittää ne edelleen käyttöliittymälle,
+    // joten kaikki poikkeukset tulevat käsiteltyä tässä
+    private void errorHandler() {
+        alert.setContentText("Unexpected error has occurred.\nPlease try again.");
+        alert.showAndWait();
+    }
+
+    /**
+     * Lataa konfiguroitavat tietokannan ominaisuudet config.properties tiedostosta, sekä
+     * alustaa tietokannan ja sovelluslogiikan ilmentymän eli olion SudokuService
+     * @throws Exception jos tiedoston tai tietokannan käsittely ei onnistu
+     */
+    @Override
+    public void init() throws Exception {
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("config.properties"));
+        String sudokuDB = prop.getProperty("sudokuDB");
+        String userTable = prop.getProperty("userTable");
+        String gameTable = prop.getProperty("gameTable");
+
+        String userWorkingDir = System.getProperty("user.dir");
+        String fileSeparator = System.getProperty("file.separator");
+        String dbUrl = "jdbc:sqlite:" + userWorkingDir + fileSeparator + sudokuDB;
+
+        sudokuService = new SudokuService(dbUrl, userTable, gameTable);
+    }
+
+    /**
+     * Luo käyttöliittymän ja avaa sovelluksen
+     * @param stage ainoa sovelluksen käyttämä stage-olio
+     */
+    @Override
+    public void start(Stage stage) {
+        createLoginScene(stage);
+
+        createMenuScene(stage);
+
+        createGameScene(stage);
+
+        createStatisticsScene(stage);
+
+        setup(stage);
     }
 
     /**

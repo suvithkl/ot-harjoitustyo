@@ -12,7 +12,7 @@ import sudoku.domain.User;
 public class DBUserDao implements UserDao {
 
     private List<User> users;
-    private DatabaseHelper db;
+    private final DatabaseHelper db;
 
     /**
      * Alustaa oliomuuttujat ja hakee jo luodut käyttäjät tietokannasta users-listaan
@@ -27,6 +27,7 @@ public class DBUserDao implements UserDao {
         db.connect();
         ResultSet rs = db.getResultSet("SELECT * FROM " + db.getUserTable());
         if (rs == null) {
+            db.disconnect();
             return;
         }
         while (rs.next()) {

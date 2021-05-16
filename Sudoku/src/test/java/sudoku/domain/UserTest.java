@@ -6,28 +6,31 @@ import static org.junit.Assert.*;
 
 public class UserTest {
 
-    User u1;
+    User user;
 
     @Before
     public void setUp() {
-        u1 = new User("test");
+        user = new User("tester");
     }
 
     @Test
+    public void setsCorrectUsername() { assertEquals("tester", user.getUsername()); }
+
+    @Test
     public void sameUsernameAreEqual() {
-        User u2 = new User("test");
-        assertTrue(u1.equals(u2));
+        User u2 = new User("tester");
+        assertEquals(user, u2);
     }
 
     @Test
     public void differentUsernameNotEqual() {
         User u2 = new User("U2");
-        assertFalse(u1.equals(u2));
+        assertNotEquals(user, u2);
     }
 
     @Test
     public void differentTypeNotEqual() {
         Object o = new Object();
-        assertFalse(u1.equals(o));
+        assertNotEquals(user, o);
     }
 }

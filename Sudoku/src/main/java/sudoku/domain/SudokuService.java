@@ -1,35 +1,37 @@
 package sudoku.domain;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import sudoku.dao.GameDao;
-import sudoku.dao.UserDao;
+import sudoku.dao.*;
 
 /**
  * Sovelluslogiikasta huolehtiva luokka
  */
 public class SudokuService {
 
-    private UserDao userDao;
+    private final UserDao userDao;
     private User loggedIn;
-    private GameDao gameDao;
+    private final GameDao gameDao;
     private Game beingSolved;
 
-    public SudokuService(UserDao userDao, GameDao gameDao) {
-        this.userDao = userDao;
-        this.gameDao = gameDao;
+    public SudokuService(String dbUrl, String userTable, String gameTable) throws SQLException {
+        DatabaseHelper dbHelper = new DatabaseHelper(dbUrl, userTable, gameTable);
+        this.userDao = new DBUserDao(dbHelper);
+        this.gameDao = new DBGameDao(dbHelper, userDao);
     }
 
     /**
      * Aloittaa uuden pelin
-     * @param diff pelin vaikeustaso enumina
+     * @param difficulty pelin vaikeustaso merkkijonona
      * @see Difficulty
      * @return uusi generoitu sudokuruudukko
      */
-    public Grid startGame(Difficulty diff) {
+    public Grid startGame(String difficulty) {
+        Difficulty diff = Difficulty.convertToDifficulty(difficulty);
         this.beingSolved = new Game(loggedIn, diff);
         return beingSolved.getGrid();
     }
@@ -45,17 +47,11 @@ public class SudokuService {
     /**
      * Tallentaa pelituloksen
      * @param time pelatun pelin kesto muodossa '00:00'
-     * @return true jos pelituloksen tallentaminen onnistui, muuten false
+     * @throws Exception jos pelin tallentaminen ei onnistu
      */
-    public boolean saveGame(String time) {
+    public void saveGame(String time) throws Exception {
         beingSolved.setTime(time);
-        try {
-            gameDao.save(beingSolved);
-        } catch (Exception e) {
-            System.out.println("Exception in saveGame: " + e);
-            return false;
-        }
-        return true;
+        gameDao.save(beingSolved);
     }
 
     /**
@@ -117,18 +113,14 @@ public class SudokuService {
      * Luo uuden käyttäjän
      * @param username käyttäjänimi
      * @return true jos käyttäjän luominen onnistui, muuten false
+     * @throws Exception jos uuden käyttäjän luominen ei onnistu tallentamisvirheen vuoksi
      */
-    public boolean createUser(String username) {
+    public boolean createUser(String username) throws Exception {
         if (userDao.getByUsername(username) != null) {
             return false;
         }
         User user = new User(username);
-        try {
-            userDao.create(user);
-        } catch (Exception e) {
-            System.out.println("Exception in createUser: " + e);
-            return false;
-        }
+        userDao.create(user);
         return true;
     }
 }

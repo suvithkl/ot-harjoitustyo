@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
 import sudoku.domain.Difficulty;
 import sudoku.domain.Game;
 import sudoku.domain.User;
@@ -18,50 +19,55 @@ public class DBGameDaoTest {
     DatabaseHelper db;
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         String dbUrl = "jdbc:sqlite:" + System.getProperty("user.dir") + System.getProperty("file.separator") + "testingData.db";
         db = new DatabaseHelper(dbUrl, "User", "Game");
-        try {
-            userDao = new DBUserDao(db);
-            gameDao = new DBGameDao(db, userDao);
-        } catch (SQLException e) {
-            assert false;
-        }
+        userDao = new DBUserDao(db);
+        gameDao = new DBGameDao(db, userDao);
+    }
+
+    @Test
+    public void canCreateUserDao() { assertNotNull(userDao); }
+
+    @Test
+    public void canCreateGameDao() { assertNotNull(gameDao); }
+
+    @Test
+    public void canInitGamesList() throws SQLException {
+        Game g = new Game(new User("tester"), Difficulty.NORMAL);
+        g.setTime("08:08");
+        gameDao.save(g);
+        GameDao gd = new DBGameDao(db, userDao);
+        assertEquals(gd.getAll().get(0).getDifficulty(), Difficulty.NORMAL);
+        assertEquals("08:08", gd.getAll().get(0).getTime());
     }
 
     @Test
     public void saveAddsToDb() {
         try {
             gameDao.save(new Game(new User("tester"), Difficulty.NORMAL));
-        } catch (SQLException e) {
-            assert false;
-        }
-        db.connect();
-        ResultSet rs = db.getResultSet("SELECT * FROM Game");
-        if (rs == null) assert false;
+        } catch (SQLException e) { assert false; }
+        ResultSet rs = null;
         try {
-            assertTrue(rs.getString("name").equals("tester"));
-        } catch (SQLException e) {
-            assert false;
-        }
+            db.connect();
+            rs = db.getResultSet("SELECT * FROM Game");
+            assert rs != null;
+        } catch (SQLException e) { assert false; }
+        try {
+            assertEquals("tester", rs.getString("name"));
+        } catch (SQLException e) { assert false; }
     }
 
     @Test
     public void saveAddsToList() {
         try {
             gameDao.save(new Game(new User("tester"), Difficulty.NORMAL));
-        } catch (SQLException e) {
-            assert false;
-        }
-        assertTrue(gameDao.getAll().get(0).getDifficulty().equals(Difficulty.NORMAL));
+        } catch (SQLException e) { assert false; }
+        assertEquals(gameDao.getAll().get(0).getDifficulty(), Difficulty.NORMAL);
     }
 
     @Test
-    public void returnsCorrectDifficultyEnum() {
-        assertTrue(gameDao.convertToDifficulty("EASY").equals(Difficulty.EASY));
-        assertTrue(gameDao.convertToDifficulty("NORMAL").equals(Difficulty.NORMAL));
-        assertTrue(gameDao.convertToDifficulty("HARD").equals(Difficulty.HARD));
-    }
+    public void returnsGamesList() { assertNotNull(gameDao.getAll()); }
 
     @After
     public void tearDown() throws Exception {

@@ -14,7 +14,7 @@ import sudoku.domain.User;
 public class DBGameDao implements GameDao {
 
     private List<Game> games;
-    private DatabaseHelper db;
+    private final DatabaseHelper db;
 
     /**
      * Alustaa oliomuuttujat ja hakee jo tallennetut pelit tietokannasta games-listaan
@@ -36,31 +36,13 @@ public class DBGameDao implements GameDao {
             String username = rs.getString("name");
             User user = users.getByUsername(username);
             String diff = rs.getString("difficulty");
-            Difficulty difficulty = convertToDifficulty(diff);
+            Difficulty difficulty = Difficulty.convertToDifficulty(diff);
             Game g = new Game(user, difficulty);
             String time = rs.getString("time");
             g.setTime(time);
             games.add(g);
         }
         db.disconnect();
-    }
-
-    /**
-     * Muuntaa vaikeustason merkkijonosta Difficulty-enumiksi
-     * @param diff vaikeustaso merkkijonona
-     * @return vaikeustaso enumina
-     * @see Difficulty
-     */
-    protected Difficulty convertToDifficulty(String diff) {
-        if (diff.equals(Difficulty.EASY.name())) {
-            return Difficulty.EASY;
-        } else if (diff.equals(Difficulty.NORMAL.name())) {
-            return Difficulty.NORMAL;
-        } else if (diff.equals(Difficulty.HARD.name())) {
-            return Difficulty.HARD;
-        } else {
-            return null;
-        }
     }
 
     /**
