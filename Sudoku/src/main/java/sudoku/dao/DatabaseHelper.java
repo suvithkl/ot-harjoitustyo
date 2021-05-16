@@ -36,7 +36,7 @@ public class DatabaseHelper {
      * @throws SQLException jos yhteyden muodostus ei onnistu
      */
     public void connect() throws SQLException {
-        if (db != null) {
+        if (!(db.isClosed())) {
             disconnect();
         }
         db = DriverManager.getConnection(dbUrl);
@@ -47,7 +47,9 @@ public class DatabaseHelper {
      * @throws SQLException jos yhteyden muodostus ei onnistu
      */
     public void disconnect() throws SQLException {
-        db.close();
+        if (!(db.isClosed())) {
+            db.close();
+        }
         if (!(p.isClosed())) {
             p.close();
         }
