@@ -16,6 +16,8 @@ juureen on jätetty joitakin _.idea_-kansion tiedostoja [suositusten](https://gi
 
 [Arkkitehtuurikuvaus](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 [Työaikakirjanpito](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
 ## Releaset
@@ -23,6 +25,8 @@ juureen on jätetty joitakin _.idea_-kansion tiedostoja [suositusten](https://gi
 [Viikko 5](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko5)
 
 [Viikko 6](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6)
+
+[Loppupalautus]()
 
 ## Komentorivikomennot
 
@@ -34,7 +38,7 @@ Projekti voidaan suorittaa komennolla
 ```
 mvn compile exec:java -Dexec.mainClass=sudoku.ui.Main
 ```
-Jos ohjelmaa yritetään suorittaa virtuaalityöpöydän avulla ja yllä oleva komento aiheuttaa SQL-virheen, on repositorio kloonattava hakemistoon _/tmp_ (ei siis kotihakemistoon, virtuaalityöpöydän verkkolevy ei ole osoittautunut tarpeeksi nopeaksi tietokannalle).
+Jos ohjelmaa yritetään suorittaa virtuaalityöpöydän avulla ja yllä oleva komento aiheuttaa SQL-virheen, on repositorio kloonattava suoraan hakemistoon _~/_. Jos myöskään tämä ei auta, on se kloonattava hakemistoon _/tmp_ (ei siis kotihakemistoon, virtuaalityöpöydän verkkolevy ei ole aina osoittautunut tarpeeksi nopeaksi tietokannalle).
 
 ### Testaus
 
