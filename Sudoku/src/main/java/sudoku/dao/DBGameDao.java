@@ -32,6 +32,7 @@ public class DBGameDao implements GameDao {
         db.connect();
         ResultSet rs = db.getResultSet("SELECT * FROM " + db.getGameTable());
         if (rs == null) {
+            db.closeresultSet();
             db.disconnect();
             return;
         }
@@ -45,6 +46,7 @@ public class DBGameDao implements GameDao {
             g.setTime(time);
             games.add(g);
         }
+        db.closeresultSet();
         db.disconnect();
     }
 

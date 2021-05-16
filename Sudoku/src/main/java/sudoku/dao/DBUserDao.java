@@ -29,6 +29,7 @@ public class DBUserDao implements UserDao {
         db.connect();
         ResultSet rs = db.getResultSet("SELECT * FROM " + db.getUserTable());
         if (rs == null) {
+            db.closeresultSet();
             db.disconnect();
             return;
         }
@@ -36,6 +37,7 @@ public class DBUserDao implements UserDao {
             User u = new User(rs.getString("name"));
             users.add(u);
         }
+        db.closeresultSet();
         db.disconnect();
     }
 
