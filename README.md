@@ -1,4 +1,4 @@
-# Ohjelmistotekniikka, harjoitustyö
+# Sudoku - Ohjelmistotekniikka, harjoitustyö
 
 ## Sudoku
 
