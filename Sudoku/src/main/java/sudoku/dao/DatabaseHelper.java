@@ -81,12 +81,6 @@ public class DatabaseHelper {
         return rs;
     }
 
-    public void closeResultSet() throws SQLException {
-        if (rs != null) {
-            rs.close();
-        }
-    }
-
     /**
      * Lisää tietoa tietokantaan.
      * @param statement tiedon lisäävä SQL-kielinen komento (INSERT INTO -lause) merkkijonona
