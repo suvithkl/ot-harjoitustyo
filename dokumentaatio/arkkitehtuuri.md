@@ -83,3 +83,13 @@ Käyttöliittymän tapahtumakäsittelijä kutsuu sovelluslogiikan [SudokuService
 ## Ohjelman rakenteen heikkoudet
 
 ### Käyttöliittymä
+
+Graafinen käyttöliittymä rakennetaan kokonaan pakkauksen _sudoku.ui_ luokassa [SudokuUi](https://github.com/suvithkl/ot-harjoitustyo/blob/master/Sudoku/src/main/java/sudoku/ui/SudokuUi.java). Vaikkakin luokka on pilkottu pienehköihin osiin, eri näkymien varsinaisten graafisten komponenttien luomista lukuunottamatta (näkymät ovat kuitenkin silti omissa metodeissaan), olisi näitä metodeja voinut jakaa useampaan luokkaan. Nyt luokka on turhan pitkä. Lisäksi näkymien luomista olisi varmastikin vielä saanut pilkottua metodeihin.
+
+Myös FMXL:n käyttöönotto voisi selkeyttää käyttöliittymää, sillä siinä on melko useita muuttuvia osia.
+
+### Sovelluslogiikka
+
+_Game_ ja _Grid_ -luokkien erottelusta tuli loppujen lopuksi ehkä hieman turha, sillä _GridCreator_ ja _GridSolver_ -luokkien mukaantulo lyhensikin alunperin pitkää _Grid_-luokkaa huomattavasti. Nyt niiden yhdistämistä voisi mahdollisesti harkita.
+
+Lisäksi sudokuruudukon satunnaistamista voisi totta kai aina lisätä. _GridCreator_-luokan metodista _canErase_ saisi varmastikin vielä luontevamman, ja siinä voisi olla lisänä, että vaikeammissa vaikeustasoissa yksi tyhjä rivi tai kolumni olisi hyväksyttävä pelaajalle annettavassa sudokuruudukossa.
