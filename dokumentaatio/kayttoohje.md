@@ -1,12 +1,27 @@
 # Käyttöohje
 
-Lataa ja pura [palautusrepositorion lähdekoodi](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/viikko6).
+Lataa tiedosto [Sudoku.jar](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/loppupalautus).
+
+Vaihtoehtoisesti lataa ja pura [palautusrepositorion lähdekoodi](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/loppupalautus).
 
 ## Konfigurointi
 
+Sovellus edellyttää, että jar-tiedoston kanssa samassa hakemistossa on tietokannan, sekä sen taulujen nimet määrittelevä konfiguraatiotiedosto [config.properties](https://github.com/suvithkl/ot-harjoitustyo/releases/tag/loppupalautus). Lataa myös se samaan hakemistoon, tai vaihtoehtoisesti määrittele se itse seuraavassa muodossa
+```
+sudokuDB=sudokuData.db
+userTable=User
+gameTable=Game
+```
+Ladattaessa lähdekoodi konfiguraatiotiedosto tulee automaattisesti mukana.
+
 ## Sovelluksen käynnistäminen
 
-Käynnistä sovellus kansiosta _Sudoku_ komennolla
+Käynnistä sovellus komennolla
+```
+java -jar Sudoku.jar
+```
+
+Ladattaessa lähdekoodi käynnistä sovellus kansiosta _Sudoku_ komennolla
 ```
 mvn compile exec:java -Dexec.mainClass=sudoku.ui.Main
 ```
@@ -41,13 +56,13 @@ Vaikeustason valinnan jälkeen siirrytään pelinäkymään.
 
 Täytä sudokuruudukkoa painamalla ensin haluamaasi ruutua ja sen jälkeen alareunan numeronapeista haluamaasi numeroa.
 
-Näet sudokun ratkaisemiseen käyttäneesi sekunnit pelinäkymän oikeasta yläkulmasta.
+Näet sudokun ratkaisemiseen käyttäneesi sekunnit ja minuutit numeronappien alapuolella.
 
 Tarkista onko täyttämäsi sudoku ratkaistu oikein painamalla nappia _CHECK_.
 
 Jos sudoku on ratkaistu oikein, pelin tiedot tallennetaan pelitilastoihin ja siirrytään takaisin valikkonäkymään.
 
-Jos sudoku on ratkaistu väärin, siirrytään takaisin valikkonäkymään.
+Jos sudoku on ratkaistu väärin, voit valita siirrytäänkö takaisin valikkonäkymään, vai jatketaanko pelaamista.
 
 Lopeta keskeneräinen peli ja palaa takaisin valikkonäkymään painamalla nappia _MENU_.
 
@@ -55,7 +70,9 @@ Lopeta keskeneräinen peli ja palaa takaisin valikkonäkymään painamalla nappi
 
 Tarkastele pelitilastoja painamalla valikkonäkymän nappia _STATS_.
 
-Ratkaistuista sudokuista näytetään ratkaisseen pelaajan käyttäjänimi, käytetty aika sekunteina sekä pelin vaikeustaso.
+Ratkaistuista sudokuista näytetään ratkaisseen pelaajan käyttäjänimi, käytetty aika sekä pelin vaikeustaso.
+
+Vasemmassa listassa näkyvät omat pelituloksesi, oikeassa kaikkien pelaajien kootut pelitulokset.
 
 Palaa takaisin valikkonäkymään painamalla nappia _MENU_.
 
@@ -67,4 +84,6 @@ Uloskirjautumisen jälkeen siirrytään kirjautumisnäkymään.
 
 ## Sovelluksen sulkeminen
 
-Sulje sovellus sulkemalla ikkuna eli painamalla ikkunan yläkulman punaista ruksia.
+Sulje sovellus kirjautumisnäkymässä painamalla nappia _EXIT_.
+
+Vaihtoehtoisesti sulje sovellus sulkemalla ikkuna eli painamalla ikkunan yläkulman ruksia.
