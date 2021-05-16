@@ -28,6 +28,14 @@ Järjestelmätestaus on manuaalisesti toteutettua.
 
 ### Asennus ja konfigurointi
 
+Sovellus on asennettu ja testattu kuten [käyttöohje](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md) ohjaa. Testausta suoritettiin sekä Linux- että Windows-ympäristöissä. Käynnistyshakemistossa oli _config.properties_-tiedosto, kuten käyttöohje edellyttää.
+
+Sovellusta on testattu niin, että tietokantaa ei ollut aluksi olemassa, sekä niin, että tietokanta oli jo luotuna.
+
 ### Toiminnallisuudet
 
+Niin [vaatimusmäärittelyn](https://github.com/suvithkl/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md) kuin käyttöohjeenkin toiminnallisuudet ja vaiheet on testattu. Myös virheellisiä syötteitä on testattu, sekä sudokuruudukon alunperin sisältämien numeroiden vaihtamista (mikä ei ole sallittua) on yritetty.
+
 ## Sovelluksen laatuongelmat
+
+Virtuaalityöpöytää käyttäessä sovellus saattaa lukkiutua, jos sitä ei ladata hakemistoon _~/_ tai hakemistoon _/tmp_. Tällöin virheilmoitus tulostuu ainoastaan terminaaliin. Lisäksi jos tietokantaan ei ole luku- tai kirjoitusoikeuksia, virheilmoitus tulostuu vain terminaaliin.
