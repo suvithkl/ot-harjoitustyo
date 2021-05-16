@@ -2,59 +2,56 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksella käyttäjien on mahdollista pelata perinteistä 9x9-ruudukollista sudokua. Sovellukseen on mahdollista rekisteröidä useita käyttäjänimiä. Näihin käyttäjänimiin perustuen kerätään pelituloksia,
-ja pelaajat voivat sitten tarkastella omia parhaita tuloksiaan.
+Sovelluksella käyttäjien on mahdollista pelata perinteistä 9x9-ruudukollista sudokua. Sovellukseen on mahdollista rekisteröidä useita käyttäjänimiä. Näihin käyttäjänimiin perustuen kerätään pelituloksia, ja pelaajat voivat sitten tarkastella omia parhaita tuloksiaan.
 
 ## Käyttäjät
 
-Aluksi on vain _normaaleja käyttäjiä_ eli vain yksi käyttäjärooli. Myöhemmin mahdollisesti lisätään rooli _pääkäyttäjä_, jolla on enemmän oikeuksia, kuten käyttäjänimen poisto.
+Sovelluksella on vain _normaaleja käyttäjiä_ eli vain yksi käyttäjärooli. Kaikkien käyttäjien on siis mahdollista käyttää kaikkia ominaisuuksia.
 
-## Käyttöliittymäluonnos sanallisesti
+## Käyttöliittymä sanallisesti
 
 Sovelluksessa on neljä näkymää. Avattaessa sovellus aukeaa kirjautumisnäkymä, jossa samassa on mahdollista luoda uusi käyttäjänimi. Kun kirjautuminen onnistuu, siirrytään aloitusvalikkonäkymään.
-Siitä on mahdollista siirtyä pelinäkymään, eli itse sudokuun, tai pelitilastonäkymään. Pelinäkymästä sekä tilastonäkymästä on mahdollista siirtyä takaisin aloitusnäkymään. Kirjauduttaessa ulos siirrytään
-takaisin kirjautumisnäkymään.
+Siitä on mahdollista siirtyä pelinäkymään, eli itse sudokuun, tai pelitilastonäkymään. Pelinäkymästä sekä tilastonäkymästä on mahdollista siirtyä takaisin aloitusnäkymään. Kirjauduttaessa ulos siirrytään takaisin kirjautumisnäkymään.
 
-## Perusversion suunniteltu toiminnallisuus
+## Toiminnallisuus
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi tehdä käyttäjänimen järjestelmään _(tehty)_
-  - Käyttäjänimen on oltava vähintään 2 merkkiä pitkä ja uniikki
+- Käyttäjä voi tehdä käyttäjänimen järjestelmään
+  - Käyttäjänimen on oltava vähintään 2 merkkiä pitkä, lainausmerkkejä ja asteriskeja sisältämätön, sekä uniikki
 
-- Käyttäjä voi kirjautua sisään järjestelmään _(tehty)_
+- Käyttäjä voi kirjautua sisään järjestelmään
   - Jos syötetään olemassa oleva käyttäjänimi, kirjautuminen onnistuu
   - Jos syötetään käyttäjänimi, jota ei ole olemassa, annetaan tästä ilmoitus
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä voi pelata sudokua _(tehty)_
-  - Käyttäjälle generoidaan näin valittaessa sudokuruudukko
+- Käyttäjä voi pelata sudokua
+  - Valittavissa on kolme eri vaikeustasoa (helppo, normaali ja vaikea)
+  - Valittaessa jonkin näistä käyttäjälle generoidaan vaikeustasoa vastaava sudokuruudukko
   - Tämän jälkeen sudoku on ratkaistavissa
-  - Sen voi ratkaista valitsemalla ruudukon ruudun kerrallaan ja kirjoittamalla numeron _(huom. jatkokehitysidean tavalla)_
+  - Sen voi ratkaista valitsemalla ensin jonkin pelinäkymän numeronapeista ja sitten ruudukon ruutua klikkaamalla
 
-- Käyttäjä voi palata kesken sudokun aloitusnäkymään _(tehty)_
+- Käyttäjä voi palata kesken pelin aloitusnäkymään
 
-- Käyttäjälle ilmoitetaan, onko täytetty sudoku on oikein vai väärin _(tehty)_
-  - Väärän ratkaisun tapauksessa palataan aloitusnäkymään
+- Käyttäjälle ilmoitetaan tarkistusnappia painettaessa, onko täytetty sudoku on oikein vai väärin
+  - Väärän ratkaisun tapauksessa käyttäjä voi palata aloitusnäkymään tai jatkaa peliä vaihtamalla asettamiaan numeroita
 
-- Kun sudoku on ratkaistu oikein, paikalliselle levylle tallentuu tieto pelanneesta käyttäjästä ja käytetystä ajasta _(tehty)_
+- Kun sudoku on ratkaistu oikein, paikalliselle levylle tallentuu tieto pelanneesta käyttäjästä, käytetystä ajasta ja vaikeustasosta
 
-- Käyttäjä voi tarkastella pelitulostilastoja _(tehty)_
+- Käyttäjä voi tarkastella pelitulostilastoja
+  - Nähtävissä ovat sekä omat, että kaikkien pelaajien kootut tulokset
 
-- Käyttäjä voi kirjautua ulos sovelluksesta _(tehty)_
+- Käyttäjä voi kirjautua ulos sovelluksesta
+
+- Käyttäjä voi sulkea sovelluksen aloitusnäkymän painikkeella
 
 ## Jatkokehitysideoita
 
-Perusversion toteuttamisen jälkeen järjestelmää saatetaan mahdollisesti täydentää muun muassa seuraavilla ominaisuuksilla
+Kurssin jälkeen järjestelmää saatetaan mahdollisesti täydentää seuraavilla ominaisuuksilla
 
-- Väärin täytetyn sudokun tapauksessa on vaihtoehtoina joko palata aloitusnäkymään tai jatkaa peliä vaihtamalla numeroita
-- Pelituloksiin tallennetaan peliajan lisäksi tehtyjen virheiden määrä
-- Käyttäjät voivat tarkastella kaikkien pelaajien koottuja parhaita tuloksia
-- Pelituloksien tallentaminen verkkoon
-- Puhtaasti graafinen käyttöliittymä, numerot laitetaan ruutuihin ensin numeronappia ja sitten ruudukon ruutua klikkaamalla _(tehty)_
-- Vaikeustason valinta, normaali ja vaikea (eli vähemmän numeroita alussa) _(tehty)_
-- Pelityylin valinta, vapaa eli normaali ja aikahaaste (sudoku ratkaistava tietyssä ajassa)
+- Pelituloksiin tallennetaan lisäksi tehtyjen virheiden määrä
+- Pelityylin valinta; vapaa eli normaali ja aikahaaste (sudoku ratkaistava tietyssä ajassa)
 - Keskeytettyä sudokua voi jatkaa myöhemmin
 - Käyttäjänimeen liittyy myös salasana, jonka kirjautuminen vaatii
 - Käyttäjänimen ja sen alla tehtyjen pelitulosten poisto
