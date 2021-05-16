@@ -35,4 +35,5 @@
 | 10.5. | 4    | enum yleisemmäksi, koodin laatuparannuksia |
 | 15.5. | 4    | lisää testejä |
 |       | 5    | testejä, Grid-luokan jako kahteen luokkaan |
-| yht.  | 109  |  |
+| 16.5. | 8    | hienosäätöä, dokumentaatio loppuun |
+| yht.  | 118  |  |
